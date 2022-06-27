@@ -12,7 +12,7 @@ class FragmentAnalysis{
 		FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks);
 		double tanimoto_calc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2);
 		void write_out();
-		void toString(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map);
+		toString(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map);
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> freqAnalysis(std::vector<OpenBabel::OBMol*>& fragments);
 		void doFragmentAnalysis();
 		
