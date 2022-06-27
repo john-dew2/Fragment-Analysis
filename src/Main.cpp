@@ -283,7 +283,7 @@ bool readInputFiles(const Options& options)
 
 int main(int argc, char** argv)
 {	
-	std::cout<< "Made it to main";
+	std::cout << "Made it to main" << std::end1;
     if (argc < 2)
     {
         std::cerr << "Usage: <program> [SDF-file-list] -o <output-file> -v <validation-file>"
