@@ -3,6 +3,7 @@
 //Frequency Analysis
 
 #include <vector>
+#include<iterator> // for iterators
 #include <map>
 #include <iostream>
 #include <fstream>
@@ -161,6 +162,19 @@
 		
 	}
 	
+	void FragmentAnalysis::toString(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map){
+		
+		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>::iterator it;
+
+		for (it = map.begin(); it != map.end(); it++)
+		{
+			std::cout << it->first    // string (key)
+              << ':'
+              << it->second   // string's value 
+              << std::endl;
+		}
+	}
+	
 	void FragmentAnalysis::doFragmentAnalysis(){
 		
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
@@ -170,7 +184,12 @@
 		linkerMap = freqAnalysis(FragmentAnalysis::_bricks);
 		
 		//std::cout << "Here is the brickMap: " << std::endl << brickMap
-		std::cout << "Finished Analysis";
+		
+		std::cout<<"Brick Map contents: " << std::endl;
+		toString(brickMap);
+		
+		std::cout<<"Linker Map contents: " << std::endl;
+		toString(linkerMap);
 		//std::cout << "Here is the linkerMap: " << std::endl << linkerMap
 		
 	}
