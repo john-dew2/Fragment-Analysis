@@ -92,7 +92,7 @@ _OBJ = Atom.o \
 	obgen.o \
 	Constants.o \
 	FragmentEdgeMap.o \
-	Analysis.o \
+	FragmentAnalysis.o \
 	zpipe.o
 	
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
