@@ -166,4 +166,8 @@
 		brickMap  = freqAnalysis(brickList);
 		linkerMap = freqAnalysis(linkerList);
 		
+		std::cout << "Here is the brickMap: " << std::end1 << brickMap
+		
+		std::cout << "Here is the linkerMap: " << std::end1 << linkerMap
+		
 	}
