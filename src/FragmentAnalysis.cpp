@@ -170,7 +170,7 @@
 		linkerMap = freqAnalysis(FragmentAnalysis::_bricks);
 		
 		//std::cout << "Here is the brickMap: " << std::endl << brickMap
-		
+		std::cout << "Finished Analysis"
 		//std::cout << "Here is the linkerMap: " << std::endl << linkerMap
 		
 	}
