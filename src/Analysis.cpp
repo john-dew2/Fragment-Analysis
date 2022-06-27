@@ -145,7 +145,7 @@
 				OpenBabel::OBMol* frag2 = fragments[j];
 				
 				//find the tc and add the brick to the list if the tc value is > the threshold
-				tc = tanimoto_brick(frag1, frag2);
+				tc = tanimoto_calc(frag1, frag2);
 				if (tc > TC_THRESHOLD){
 					similarities.push_back(frag2);
 				}
