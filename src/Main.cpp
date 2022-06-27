@@ -357,7 +357,7 @@ int main(int argc, char** argv)
 	//if (Options::FREQUENCY_ANALYSIS_ONLY)
 	//{
 		
-	FragmentAnalysis analyzer = FragmentAnalysis::FragmentAnalysis(linkmol, brickmol);
+	FragmentAnalysis analyzer(linkmol, brickmol);
 	analyzer.doFragmentAnalysis();
 		
 	//exit main
