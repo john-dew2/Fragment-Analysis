@@ -16,8 +16,8 @@ class FragmentAnalysis{
 		void doFragmentAnalysis();
 		
 	private:
-		std::vector<unsigned char>() _linkers;
-		std::vector<unsigned char>() _bricks;
+		std::vector<OpenBabel::OBMol*>& _linkers = std::vector<unsigned char>();
+		std::vector<OpenBabel::OBMol*>& _bricks  = std::vector<unsigned char>();
 };
 
 // void Analysis::doFrequencyAnalysis(std::vector<OpenBabel::OBMol*>& linkerList, std::vector<OpenBabel::OBMol*>& brickList){
