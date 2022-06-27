@@ -73,6 +73,7 @@ _WRITER_DEPS = compliantwriter.h
 _TOSMI_DEPS = convertToSMI.h 
 
 _OBJ = Atom.o \
+	Instantiator.o \
 	Linker.o\
 	Main.o \
 	Molecule.o \
@@ -85,10 +86,14 @@ _OBJ = Atom.o \
 	Bond.o \
 	AtomT.o \
 	OBWriter.o \
+	Validator.o \
 	Options.o \
+	IdFactory.o \
 	obgen.o \
 	Constants.o \
-	Analysis.o 
+	FragmentEdgeMap.o \
+	Analysis.o \
+	zpipe.o
 	
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
