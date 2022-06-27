@@ -60,8 +60,8 @@
 
 #include "FragmentAnalysis.h"
 	void FragmentAnalysis::FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks) {
-		_linkers = linkers;
-		_bricks = bricks;
+		FragmentAnalysis::_linkers = linkers;
+		FragmentAnalysis::_bricks = bricks;
 	}
 	
 	double FragmentAnalysis::tanimoto_calc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2)
@@ -166,8 +166,8 @@
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
 		
-		brickMap  = freqAnalysis(_linkers);
-		linkerMap = freqAnalysis(_bricks);
+		brickMap  = freqAnalysis(FragmentAnalysis::_linkers);
+		linkerMap = freqAnalysis(FragmentAnalysis::_bricks);
 		
 		std::cout << "Here is the brickMap: " << std::end1 << brickMap
 		
