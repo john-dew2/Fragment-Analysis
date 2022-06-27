@@ -241,8 +241,7 @@ void readMoleculeFile(const char* fileName)
         // Add to the linker or brick list as needed.
         addMolecule(tolower(fileName[0]), local); 
 
-        // We don't keep a copy of the OpenBabel molecule anymore.
-		
+        // DEWEY 6/27: dont delete the molecule, instead save it to either the brick or linker list
 		if (fileName[0] == 'l')
 		{
 			linkmol.push_back(mol);        
@@ -254,7 +253,7 @@ void readMoleculeFile(const char* fileName)
 		}
 			
 			//COME BACK AND FIX
-			//delete mol;
+			delete mol;
 	}
 }
 
@@ -364,52 +363,6 @@ int main(int argc, char** argv)
 		Cleanup(linkers, bricks);
 		return 0;
 	}
-
-    // Output object for the nodes of the hypergraph.
-    OBWriter* writer = new OBWriter(Options::OBGEN_THREAD_POOL_SIZE);
-    if (Options::SMI_ONLY) writer->InitializeFile(options.outFileSMI);
-    else writer->InitializeFile(options.outFile);
-    if (options.validationFile == "") OBWriter::TurnValidationOff();
-
-    // The main object that performs synthesis.
-    Instantiator instantiator(writer, cout); //, options.validationFile);
-
-    // Instantiation build the hypergraph; this is the main data structure for the
-    // resultant molecules.
-    // Also creates the hypergraph using threaded or non-threaded techniques.
-    //MoleculeHashHypergraph* graph = 0;
-    //if (Options::THREADED) graph = instantiator.ThreadedInstantiate(linkers, bricks);
-    //else if (Options::SERIAL) graph = instantiator.SerialInstantiate(linkers, bricks);
-
-    // std::cout << "Hypergraph contains (" << graph->currentSize()
-    //           << ", " << graph->nonKilledSize()<< ") nodes" << std::endl;
-
-
-    unsigned inc = instantiator.getIncluded();
-    unsigned exc = instantiator.getExcluded();
-
-    std::cout << "Excluded (" << exc << "); Included (" << inc << ") \t Excluded: "
-              << ((double)(exc) / (exc + inc)) << "\%" << std::endl;  
-
-    // External output will always have 0 molecules; uncomment for internal usage and
-    // accurate numbers.
-    // std::cout << OBWriter::NumCompliantMolecules()
-    //          << " are Lipinski compliant molecules" << std::endl;
-
-    //
-    // Validate the molecules specified in the validation file (command-line -v)
-    //
-    Validator validator(OBWriter::compliantMols);
-    validator.Validate(options.validationFile);
-
-    // Deleting the writer will kill the thread pool.
-    delete writer; 
-
-    Cleanup(linkers, bricks);
-
-std::cerr << "Exiting the main thread." << std::endl;
-
-//muntrace();
 
     return 0;
 }
