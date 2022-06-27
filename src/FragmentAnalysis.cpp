@@ -59,7 +59,7 @@
 
 
 #include "FragmentAnalysis.h"
-	void FragmentAnalysis::FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks) {
+	FragmentAnalysis::FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks) {
 		FragmentAnalysis::_linkers = linkers;
 		FragmentAnalysis::_bricks = bricks;
 	}
