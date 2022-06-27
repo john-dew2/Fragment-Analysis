@@ -313,20 +313,6 @@ void Instantiator::SerialInstantiateHelper(unsigned level,
         // Leave; no need to process.
         return;
     }
-	
-	if (level >= KILL_LEVEL)
-	{
-		// Kill the contents of the queue
-        while (!level_queues[level].empty())
-        {
-            Molecule* currentMol = level_queues[level].front();
-            level_queues[level].pop();
-            delete currentMol;
-        }
-
-        // Leave; no need to process.
-        return;
-	}
 
     //
     // Completely process all molecules in this level into level + 1
