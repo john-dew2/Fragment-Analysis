@@ -7,12 +7,12 @@
 #include <openbabel/mol.h>
 
 
-class Analysis{
+class FragmentAnalysis{
 	public:
-		static double tanimoto_calc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2);
-		static void write_out();
-		static map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> freqAnalysis(std::vector<OpenBabel::OBMol*>& fragments);
-		static void doFrequencyAnalysis(std::vector<OpenBabel::OBMol*>& linkerList, std::vector<OpenBabel::OBMol*>& brickList);
+		double tanimoto_calc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2);
+		void write_out();
+		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> freqAnalysis(std::vector<OpenBabel::OBMol*>& fragments);
+		void doFrequencyAnalysis(std::vector<OpenBabel::OBMol*>& linkerList, std::vector<OpenBabel::OBMol*>& brickList);
 };
 
 // void Analysis::doFrequencyAnalysis(std::vector<OpenBabel::OBMol*>& linkerList, std::vector<OpenBabel::OBMol*>& brickList){

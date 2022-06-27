@@ -58,10 +58,10 @@
 
 
 
-#include "Analysis.h"
+#include "FragmentAnalysis.h"
 
 	
-	double Analysis::tanimoto_calc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2)
+	double FragmentAnalysis::tanimoto_calc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2)
 	{
 		//create two vectors
 		std::vector<unsigned int> vector1;
@@ -91,7 +91,7 @@
 		
 	}
 
-	void Analysis::write_out()
+	void FragmentAnalysis::write_out()
 	{
 		
 		string printStr;
@@ -123,7 +123,7 @@
 
 	}
 
-	map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> Analysis::freqAnalysis(std::vector<OpenBabel::OBMol*>& fragments)
+	map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> FragmentAnalysis::freqAnalysis(std::vector<OpenBabel::OBMol*>& fragments)
 	{
 		
 		std::vector<OpenBabel::OBMol*> similarities;
@@ -158,7 +158,7 @@
 		
 	}
 	
-	void Analysis::doFrequencyAnalysis(std::vector<OpenBabel::OBMol*>& linkerList, std::vector<OpenBabel::OBMol*>& brickList){
+	void FragmentAnalysis::doFrequencyAnalysis(std::vector<OpenBabel::OBMol*>& linkerList, std::vector<OpenBabel::OBMol*>& brickList){
 		
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;

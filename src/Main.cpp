@@ -66,7 +66,7 @@
 #include "IdFactory.h"
 #include "Constants.h"
 
-#include "Analysis.h"
+#include "FragmentAnalysis.h"
 
 
 //
@@ -356,6 +356,8 @@ int main(int argc, char** argv)
 	//Added 6/23 - Dewey
 	//if (Options::FREQUENCY_ANALYSIS_ONLY)
 	//{
+		
+	std::cout << brickmol
 		
 	//enter frequency analysis
 	Analysis::doFrequencyAnalysis(linkmol, brickmol);
