@@ -168,7 +168,9 @@
 		} */
 		
 		for (const auto& n : map) {
-			std::cout << n.first << " = " << n.second << "; ";
+			char* name = n.first.GetTitle();
+			int length = n.second.length();
+			std::cout << name << " = " << length << "; ";
 		}
     }
 
