@@ -362,6 +362,8 @@ int main(int argc, char** argv)
 		
 	//exit main
 	Cleanup(linkers, bricks);
+	
+	Cleanup(linkmol, brickmol);
 
 	//}
 
