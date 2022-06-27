@@ -124,7 +124,6 @@ Instantiator::Instantiator(OBWriter* obWriter,
     }
     for (unsigned m = 1; m <= HIERARCHICAL_LEVEL_BOUND; m++)
     {
-		###Maybe Here
         if (Options::THREADED)
         {
             // Initialize those container locks.
@@ -315,7 +314,6 @@ void Instantiator::SerialInstantiateHelper(unsigned level,
         return;
     }
 	
-	###Here we can kill
 	if (level >= KILL_LEVEL)
 	{
 		// Kill the contents of the queue
