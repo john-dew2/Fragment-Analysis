@@ -354,8 +354,6 @@ int main(int argc, char** argv)
     }
 	
 	//Added 6/23 - Dewey
-	//if (Options::FREQUENCY_ANALYSIS_ONLY)
-	//{
 		
 	FragmentAnalysis analyzer(linkmol, brickmol);
 	analyzer.doFragmentAnalysis();
