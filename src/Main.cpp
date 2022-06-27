@@ -357,10 +357,8 @@ int main(int argc, char** argv)
 	//if (Options::FREQUENCY_ANALYSIS_ONLY)
 	//{
 		
-	std::cout << brickmol
-		
-	//enter frequency analysis
-	Analysis::doFrequencyAnalysis(linkmol, brickmol);
+	FragmentAnalysis analyzer = FragmentAnalysis::FragmentAnalysis(linkmol, brickmol);
+	analyzer.doFragmentAnalysis();
 		
 	//exit main
 	Cleanup(linkers, bricks);
