@@ -163,12 +163,16 @@
 	}
 	
 	void FragmentAnalysis::toString(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map){
-		for (const auto& [key, value] : map) {
+		/* for (const auto& [key, value] : map) {
 			std::cout << '[' << key << "] = " << value << "; ";
+		} */
+		
+		for (const auto& n : map) {
+			std::cout << n.first << " = " << n.second << "; ";
 		}
     }
 
-}
+
 	
 	void FragmentAnalysis::doFragmentAnalysis(){
 		
