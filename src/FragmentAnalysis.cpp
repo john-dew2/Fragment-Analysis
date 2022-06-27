@@ -155,14 +155,14 @@
 				}
 		}
 			//add a new map entry before the next iteration
-			frequencyMap.insert(std::string_view comment, pair<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>(frag1, similarities));
+			frequencyMap.insert(pair<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>(frag1, similarities));
 		}
 		
 		return frequencyMap;
 		
 	}
 	
-	void FragmentAnalysis::toString(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map){
+	void FragmentAnalysis::printMap(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map){
 		/* for (const auto& [key, value] : map) {
 			std::cout << '[' << key << "] = " << value << "; ";
 		} */
