@@ -354,15 +354,16 @@ int main(int argc, char** argv)
     }
 	
 	//Added 6/23 - Dewey
-	if (Options::FREQUENCY_ANALYSIS_ONLY)
-	{
-		//enter frequency analysis
-		Analysis::doFrequencyAnalysis(linkmol, brickmol);
+	//if (Options::FREQUENCY_ANALYSIS_ONLY)
+	//{
 		
-		//exit main
-		Cleanup(linkers, bricks);
-		return 0;
-	}
+	//enter frequency analysis
+	Analysis::doFrequencyAnalysis(linkmol, brickmol);
+		
+	//exit main
+	Cleanup(linkers, bricks);
+
+	//}
 
     return 0;
 }
