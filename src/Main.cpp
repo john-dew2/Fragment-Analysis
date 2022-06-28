@@ -245,7 +245,7 @@ void readMoleculeFile(const char* fileName)
 		if (fileName[0] == 'l')
 		{
 			linkmol.push_back(mol);
-			cout << linkmol.size();
+			cout << "entered if";
 		}
 		// brick or brick
 		else if (fileName[0] == 'r' || fileName[0] == 'b')
