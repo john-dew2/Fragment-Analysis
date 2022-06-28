@@ -170,7 +170,7 @@
 		for (const auto& n : map) {
 			const char* name = n.first->GetTitle();
 			int length = n.second.size();
-			std::cout << name << ": " << length << " Similarities";
+			std::cout << name << ": " << length << " Similarities, ";
 		}
     }
 
@@ -186,11 +186,12 @@
 		
 		//std::cout << "Here is the brickMap: " << std::endl << brickMap
 		
-		std::cout<<"Brick Map contents: " << std::endl;
+		std::cout<<"Brick Map contents: ";
 		printMap(brickMap);
+		std::cout << std::end1;
 		
-		std::cout<<"Linker Map contents: " << std::endl;
+		std::cout<<"Linker Map contents: ";
 		printMap(linkerMap);
-		//std::cout << "Here is the linkerMap: " << std::endl << linkerMap
+		std::cout << std::end1;
 		
 	}
