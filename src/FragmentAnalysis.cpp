@@ -156,9 +156,9 @@
 		OpenBabel::OBMol* fragment;
 		
 		//populate the map
-		for (unsigned x = 0; x < coefficents.size(); x++)
+		for (unsigned x = 0; x < coefficients.size(); x++)
 		{
-			distribution.insert(pair<double, int>(coefficents[x], 0));
+			distribution.insert(pair<double, int>(coefficients[x], 0));
 		}
 		
 		//compare each brick to the subject and note the tc value between the two molecules
@@ -171,7 +171,8 @@
 			int temp = floor(tc);
 			tc = temp * 0.10;
 			
-			temp = (distribution.find(tc)) + 1
+			temp = distribution.find(tc);
+			temp += 1;
 			distribution.insert(pair<double, int>(tc, temp));
 		}
 		
