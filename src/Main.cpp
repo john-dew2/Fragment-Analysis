@@ -173,7 +173,8 @@ void addMolecule(char type, Molecule* molecule)
 
 void readMoleculeFile(const char* fileName)
 {
-    //
+    cout << "Reading Files..." << std::endl;
+	//
     // Input parser conversion functionality for Open babel
     //
     OpenBabel::OBConversion obConversion;
@@ -334,7 +335,7 @@ int main(int argc, char** argv)
               << Options::OBGEN_THREAD_POOL_SIZE << std::endl;
   }
 
-	readInputFiles(options);
+	//readInputFiles(options);
 	if (!readInputFiles(options)) {
 		std::cout << "Did not read input files" <<std:: endl;
 		return 1;
