@@ -202,7 +202,8 @@
 		{
 			distribution.insert(pair<double, int>(coefficients[x], 0));
 		}
-		cout << distribution.size() << std::endl;
+		cout << "size of map: " << distribution.size() << std::endl;
+		cout << "size of list: " << fragments.size() << std::endl;
 		
 		//for all the fragments
 		for (unsigned y = 0; y < fragments.size(); y++)
