@@ -90,7 +90,7 @@
 
 		// calculate tc
 		double tanimoto = OpenBabel::OBFingerprint::Tanimoto(vector1, vector2);
-		std::cout << tanimoto;
+		std::cout << tanimoto << std::endl;
 		
 		return tanimoto;
 		

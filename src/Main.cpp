@@ -246,7 +246,6 @@ void readMoleculeFile(const char* fileName)
 		if (fileName[0] == 'l')
 		{
 			linkmol.push_back(mol);
-			cout << "entered if";
 		}
 		// brick or brick
 		else if (fileName[0] == 'r' || fileName[0] == 'b')
@@ -350,7 +349,6 @@ int main(int argc, char** argv)
   }
 	
     //Added 6/23 - Dewey
-  std::cout<<"Made it to before analysis";
       
   FragmentAnalysis analyzer(linkmol, brickmol);
   //cout << linkmol.size();
