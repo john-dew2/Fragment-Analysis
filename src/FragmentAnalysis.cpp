@@ -84,15 +84,16 @@
 		
 	}
 
-	void FragmentAnalysis::writeReport(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map)
+	void FragmentAnalysis::writeReport(std::string fileName, map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map)
 	{
 		const char* name;
 		int numSimilar;
 		std::string similarNames;
 		std::vector<OpenBabel::OBMol*> molVector;
 		
+		
 		// Create and open a text file
-		ofstream reportFile("report.txt");
+		ofstream reportFile(fileName);
 		
 		for (const auto& pair : map) 
 		{
@@ -106,8 +107,6 @@
 			}
 			reportFile << name << " has " << numSimilar << " similar elements. Their names are: " << similarNames;
 		}
-	
-
 		// Close the file
 		reportFile.close();
 	}
@@ -178,5 +177,8 @@
 		std::cout<<"Linker Map contents: ";
 		printMap(linkerMap);
 		std::cout << std::endl;
+		
+		writeReport("brick-report.txt", brickMap)
+		writeReport("linker-report.txt", linkerMap)
 		
 	}
