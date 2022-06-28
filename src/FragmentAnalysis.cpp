@@ -171,8 +171,7 @@
 			int temp = floor(tc);
 			tc = temp * 0.10;
 			
-			temp = distribution.find(tc);
-			temp += 1;
+			temp = distribution.at(tc) + 1;
 			distribution.insert(pair<double, int>(tc, temp));
 		}
 		
