@@ -215,8 +215,7 @@
 			
 			//add one to the map entry and reinsert it
 			temp = 0;
-			temp = distribution[tanimoto];
-			temp += 1;
+			temp = distribution[tanimoto] + 1;
 			cout << tanimoto << " " << temp << std::endl;
 			distribution[tanimoto] = temp;
 		}
