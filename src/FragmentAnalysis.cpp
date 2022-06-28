@@ -72,11 +72,11 @@
 	//
 	double FragmentAnalysis::tanimotoCalc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2)
 	{
-		//create two vectors
+		//create two vectors to assign a fingerprint to
 		std::vector<unsigned int> vector1;
 		std::vector<unsigned int> vector2;
 
-		//create a fingerprint
+		//create a fingerprint object and calculate the fingerprint for the two molecules
 		OpenBabel::OBFingerprint* fpType1 = OpenBabel::OBFingerprint::FindFingerprint("");
 		fpType1->GetFingerprint(mol1, vector1);
 		fpType1->GetFingerprint(mol2, vector2);
@@ -84,10 +84,7 @@
 		//calculate the tc of the two vectors
 		double tanimoto = OpenBabel::OBFingerprint::Tanimoto(vector1, vector2);
 		
-		std::cout << tanimoto << std::endl;
-		
 		return tanimoto;
-		
 	}
 	
 	
@@ -112,7 +109,7 @@
 			molVector = pair.second;
 			numSimilar = molVector.size();
 			
-			for each element in the list
+			//for each element in the list
 			for (unsigned i = 0; i < numSimilar; i++)
 			{
 				//grab the names of the list
