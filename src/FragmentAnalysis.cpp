@@ -144,7 +144,7 @@
 		//for every pair in the map, print its name and the nummber of elements similar
 		for (const auto& pair : map) 
 		{
-			int category = pair.first;
+			double category = pair.first;
 			int amount = pair.second;
 			std::cout << "Tanimoto Coefficient: " << category << ", contains " << amount << " fragments." << std::endl;
 		}
