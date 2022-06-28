@@ -214,6 +214,7 @@
 			
 			//add one to the map entry and reinsert it
 			int temp = distribution.at(tanimoto);
+			temp += 1;
 			cout << tanimoto << " " << temp << std::endl;
 			distribution.insert(pair<double, int>(tanimoto, temp));
 		}
