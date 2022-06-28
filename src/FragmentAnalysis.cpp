@@ -146,7 +146,7 @@
 		{
 			int category = pair.first;
 			int amount = pair.second;
-			std::cout << "Tanimoto Coefficient: " << name << ", contains " << length << " fragments." << std::endl;
+			std::cout << "Tanimoto Coefficient: " << category << ", contains " << amount << " fragments." << std::endl;
 		}
 	}
 
