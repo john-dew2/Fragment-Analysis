@@ -213,7 +213,7 @@
 			tanimoto = floor(tanimoto * 10) * 0.10;
 			
 			//add one to the map entry and reinsert it
-			int temp = distribution.at(tanimoto) + 1;
+			int temp = distribution.at(tanimoto);
 			cout << tanimoto << " " << temp << std::endl;
 			distribution.insert(pair<double, int>(tanimoto, temp));
 		}
