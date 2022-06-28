@@ -170,7 +170,7 @@
 		for (const auto& n : map) {
 			const char* name = n.first->GetTitle();
 			int length = n.second.size();
-			std::cout << name << " = " << length << "; ";
+			std::cout << name << ": " << length << " Similarities";
 		}
     }
 

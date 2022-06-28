@@ -352,6 +352,8 @@ int main(int argc, char** argv)
   std::cout<<"Made it to before analysis";
       
   FragmentAnalysis analyzer(linkmol, brickmol);
+  cout << linkmol.size();
+  cout << brickmol.size();
   analyzer.doFragmentAnalysis();
       
     //exit main
