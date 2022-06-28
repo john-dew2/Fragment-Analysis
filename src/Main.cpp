@@ -334,9 +334,10 @@ int main(int argc, char** argv)
               << Options::OBGEN_THREAD_POOL_SIZE << std::endl;
   }
 
-  if (!readInputFiles(options)) {
-    std::cout << "Did not read input files" <<std:: endl;
-    return 1;
+	readInputFiles(options);
+	if (!readInputFiles(options)) {
+		std::cout << "Did not read input files" <<std:: endl;
+		return 1;
   }
 
     //
