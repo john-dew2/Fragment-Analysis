@@ -104,7 +104,8 @@
 			
 			for (unsigned i = 0; i < numSimilar; i++)
 			{
-				similarNames += molVector[i]->GetTitle() + ", ";
+				similarNames += molVector[i]->GetTitle();
+				if (!(i+1 >= numSimilar)) similarNames += ", ";
 			}
 			reportFile << name << " has " << numSimilar << " similar elements. Their names are: " << similarNames << std::endl;
 		}
