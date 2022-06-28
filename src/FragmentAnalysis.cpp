@@ -202,8 +202,8 @@
 			tanimoto = floor(tanimoto * 10) * 0.10;
 			
 			//add one to the map entry and reinsert it
-			int temp = distribution.at(tc) + 1;
-			distribution.insert(pair<double, int>(tc, temp));
+			int temp = distribution.at(tanimoto) + 1;
+			distribution.insert(pair<double, int>(tanimoto, temp));
 		}
 		
 		return distribution;
