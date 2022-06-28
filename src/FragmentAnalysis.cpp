@@ -214,8 +214,8 @@
 		map<double, int> distributionBrick  = distributionAnalysis(_bricks[0], _bricks);
 		map<double, int> distributionLinker = distributionAnalysis(_linkers[0], _linkers);
 		
-		printMap(distributionBrick);
-		printMap(distributionLinker);
+		//printMap(distributionBrick);
+		//printMap(distributionLinker);
 		
 		//writeReport("brick-report.txt", brickMap);
 		//writeReport("linker-report.txt", linkerMap);
