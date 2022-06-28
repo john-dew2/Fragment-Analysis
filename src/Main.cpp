@@ -353,7 +353,7 @@ int main(int argc, char** argv)
   FragmentAnalysis analyzer(linkmol, brickmol);
   //cout << linkmol.size();
   //cout << brickmol.size();
-  analyzer.doFragmentAnalysis();
+  analyzer.doAnalysis();
       
     //exit main
   Cleanup(linkers, bricks);
