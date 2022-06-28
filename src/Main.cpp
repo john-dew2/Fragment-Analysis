@@ -173,7 +173,7 @@ void addMolecule(char type, Molecule* molecule)
 
 void readMoleculeFile(const char* fileName)
 {
-    cout << "Reading Files..." << std::endl;
+    //cout << "Reading Files..." << std::endl;
 	//
     // Input parser conversion functionality for Open babel
     //
@@ -334,8 +334,6 @@ int main(int argc, char** argv)
     std::cerr << "OBGEN output thread pool size: "
               << Options::OBGEN_THREAD_POOL_SIZE << std::endl;
   }
-
-	//readInputFiles(options);
 	if (!readInputFiles(options)) {
 		std::cout << "Did not read input files" <<std:: endl;
 		return 1;
@@ -355,8 +353,8 @@ int main(int argc, char** argv)
   std::cout<<"Made it to before analysis";
       
   FragmentAnalysis analyzer(linkmol, brickmol);
-  cout << linkmol.size();
-  cout << brickmol.size();
+  //cout << linkmol.size();
+  //cout << brickmol.size();
   analyzer.doFragmentAnalysis();
       
     //exit main
