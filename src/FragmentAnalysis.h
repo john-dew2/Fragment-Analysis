@@ -13,6 +13,7 @@ class FragmentAnalysis{
 		double tanimotoCalc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2);
 		void writeReport(std::string fileName, map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>);
 		void printMap(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map);
+		void printDistribution(map<double, int>> map);
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> fragmentAnalysis(std::vector<OpenBabel::OBMol*>& fragments);
 		void doAnalysis();
 		map<double, int> distributionAnalysis(OpenBabel::OBMol* subject, std::vector<OpenBabel::OBMol*>& fragments);

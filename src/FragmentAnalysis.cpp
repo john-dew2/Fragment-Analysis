@@ -139,7 +139,7 @@
 		}
     }
 	
-	void FragmentAnalysis::printDistribution(map<double, int>> map)
+	void FragmentAnalysis::printDistribution(map<double, int> map)
 	{
 		//for every pair in the map, print its name and the nummber of elements similar
 		for (const auto& pair : map) 
