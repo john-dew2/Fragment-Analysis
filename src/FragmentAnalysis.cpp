@@ -56,76 +56,60 @@
 //#include "Utilities.h"
 //#include "IdFactory.h"
 #include "Constants.h"
-
-
-
 #include "FragmentAnalysis.h"
+
+
 	FragmentAnalysis::FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks) : _linkers(linkers), _bricks(bricks){
 		//FragmentAnalysis::_linkers = linkers;
 		//FragmentAnalysis::_bricks = bricks;
 	}
 	
-	double FragmentAnalysis::tanimoto_calc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2)
+	double FragmentAnalysis::tanimotoCalc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2)
 	{
 		//create two vectors
 		std::vector<unsigned int> vector1;
 		std::vector<unsigned int> vector2;
-		
-		//create an object to convert our fragments
-		//OBConversion conv;
-		//conv.SetInFormat("smi");
-		
-		//convert our fragments to a molecular object
-		//OpenBabel::OBMol* frag1 = new OpenBabel::OBMol();
-		//OpenBabel::OBMol* frag2 = new OpenBabel::OBMol();
-		
-		//conv.ReadString(frag1, brick1);
-		//conv.ReadString(frag2, brick2);
 
 		//create a fingerprint
 		OpenBabel::OBFingerprint* fpType1 = OpenBabel::OBFingerprint::FindFingerprint("");
-		
 		fpType1->GetFingerprint(mol1, vector1);
 		fpType1->GetFingerprint(mol2, vector2);
 
-		// calculate tc
+		//calculate the tc of the two vectors
 		double tanimoto = OpenBabel::OBFingerprint::Tanimoto(vector1, vector2);
+		
 		std::cout << tanimoto << std::endl;
 		
 		return tanimoto;
 		
 	}
 
-	void FragmentAnalysis::write_out()
+	void FragmentAnalysis::writeReport(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map)
 	{
-		
-		string printStr;
-
-		// Create and open a text file
-		ofstream brickFile("BrickAnalysis.txt");
-
-		// Write to the file
-		//for (pair<char*, char**> entry : brickMap ) {
-			//printStr += entry.first + entry.second;
-		//}
-		brickFile << printStr;
-		printStr = "";
-
-		// Close the file
-		brickFile.close();
+		char* name;
+		int numSimilar;
+		char* similarNames;
+		std::vector<OpenBabel::OBMol*> molVector;
 		
 		// Create and open a text file
-		ofstream linkerFile("LinkerAnalysis.txt");
-
-		// Write to the file
-			//for (pair<char*, char**> entry : linkerMap ) {
-			//printStr += entry.first + entry.second;
-		//}
-		linkerFile << printStr;
+		ofstream reportFile("report.txt");
+		
+		for (const auto& pair : map) 
+		{
+			name = pair.first->GetTitle();
+			molVector = pair.second;
+			numSimilar = molVector.size();
+			
+			for (i = 0; i < numSimilar; i++)
+			{
+				similarNames += molVector[i]->GetTitle();
+			}
+			reportFile << name << " has " << numSimilar << " similar elements. Their names are: " << similarNames
+		}
+	
 
 		// Close the file
-		linkerFile.close();
-
+		reportFile.close();
 	}
 
 	map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> FragmentAnalysis::freqAnalysis(std::vector<OpenBabel::OBMol*>& fragments)
@@ -163,15 +147,14 @@
 		
 	}
 	
-	void FragmentAnalysis::printMap(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map){
-		/* for (const auto& [key, value] : map) {
-			std::cout << '[' << key << "] = " << value << "; ";
-		} */
-		
-		for (const auto& n : map) {
-			const char* name = n.first->GetTitle();
-			int length = n.second.size();
-			std::cout << name << ": " << length << " Similarities, ";
+	void FragmentAnalysis::printMap(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map)
+	{
+		//for every pair in the map, print its name and the nummber of elements similar
+		for (const auto& pair : map) 
+		{
+			const char* name = pair.first->GetTitle();
+			int length = pair.second.size();
+			std::cout << name << ": " << length << " fragments similar, ";
 		}
     }
 
@@ -179,14 +162,15 @@
 	
 	void FragmentAnalysis::doFragmentAnalysis(){
 		
+		//create two maps
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
 		
+		//run a frequency analysis on the two sets
 		brickMap  = freqAnalysis(FragmentAnalysis::_linkers);
 		linkerMap = freqAnalysis(FragmentAnalysis::_bricks);
 		
-		//std::cout << "Here is the brickMap: " << std::endl << brickMap
-		
+		//print the contents
 		std::cout<<"Brick Map contents: ";
 		printMap(brickMap);
 		std::cout << std::endl;
