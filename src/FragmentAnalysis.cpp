@@ -188,10 +188,10 @@
 		
 		std::cout<<"Brick Map contents: ";
 		printMap(brickMap);
-		std::cout << std::end1;
+		std::cout << std::endl;
 		
 		std::cout<<"Linker Map contents: ";
 		printMap(linkerMap);
-		std::cout << std::end1;
+		std::cout << std::endl;
 		
 	}
