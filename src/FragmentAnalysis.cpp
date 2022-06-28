@@ -97,15 +97,16 @@
 		
 		for (const auto& pair : map) 
 		{
+			similarNames = "";
 			name = pair.first->GetTitle();
 			molVector = pair.second;
 			numSimilar = molVector.size();
 			
 			for (unsigned i = 0; i < numSimilar; i++)
 			{
-				similarNames += molVector[i]->GetTitle();
+				similarNames += molVector[i]->GetTitle() + ", ";
 			}
-			reportFile << name << " has " << numSimilar << " similar elements. Their names are: " << similarNames;
+			reportFile << name << " has " << numSimilar << " similar elements. Their names are: " << similarNames << std::endl;
 		}
 		// Close the file
 		reportFile.close();
@@ -166,8 +167,8 @@
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
 		
 		//run a frequency analysis on the two sets
-		brickMap  = freqAnalysis(FragmentAnalysis::_linkers);
-		linkerMap = freqAnalysis(FragmentAnalysis::_bricks);
+		brickMap  = freqAnalysis(FragmentAnalysis::_bricks);
+		linkerMap = freqAnalysis(FragmentAnalysis::_linkers);
 		
 		//print the contents
 		std::cout<<"Brick Map contents: ";
@@ -178,7 +179,7 @@
 		printMap(linkerMap);
 		std::cout << std::endl;
 		
-		writeReport("brick-report.txt", brickMap)
-		writeReport("linker-report.txt", linkerMap)
+		writeReport("brick-report.txt", brickMap);
+		writeReport("linker-report.txt", linkerMap);
 		
 	}
