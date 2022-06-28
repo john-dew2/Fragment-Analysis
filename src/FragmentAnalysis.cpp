@@ -211,6 +211,7 @@
 			
 			//get rid of the hundreths place and beyond because we are only intrested in the tenths place
 			tanimoto = floor(tanimoto * 10) * 0.10;
+			cout << tanimoto << std::endl;
 			
 			//add one to the map entry and reinsert it
 			int temp = distribution.at(tanimoto) + 1;
