@@ -88,7 +88,7 @@
 	{
 		const char* name;
 		int numSimilar;
-		const char* similarNames;
+		std::string similarNames;
 		std::vector<OpenBabel::OBMol*> molVector;
 		
 		// Create and open a text file
