@@ -244,7 +244,8 @@ void readMoleculeFile(const char* fileName)
         // DEWEY 6/27: dont delete the molecule, instead save it to either the brick or linker list
 		if (fileName[0] == 'l')
 		{
-			linkmol.push_back(mol);        
+			linkmol.push_back(mol);
+			cout << linkmol.size();
 		}
 		// brick or brick
 		else if (fileName[0] == 'r' || fileName[0] == 'b')
