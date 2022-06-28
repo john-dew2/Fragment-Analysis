@@ -195,6 +195,7 @@
 		map<double, int> distribution;
 		double tanimoto;
 		OpenBabel::OBMol* fragment;
+		int temp;
 		
 		//populate the map with default values so we can grab the entrys later
 		for (unsigned x = 0; x < coefficients.size(); x++)
@@ -213,7 +214,7 @@
 			tanimoto = floor(tanimoto * 10) * 0.10;
 			
 			//add one to the map entry and reinsert it
-			int temp += (distribution[tanimoto] + 1);
+			temp += (distribution[tanimoto] + 1);
 			cout << tanimoto << " " << temp << std::endl;
 			distribution[tanimoto] = temp;
 		}
