@@ -90,6 +90,7 @@
 
 		// calculate tc
 		double tanimoto = OpenBabel::OBFingerprint::Tanimoto(vector1, vector2);
+		std::cout << tanimoto;
 		
 		return tanimoto;
 		
@@ -144,7 +145,7 @@
 			//grab one brick
 			OpenBabel::OBMol* frag1 = fragments[i];
 			for (unsigned j = 0; j < fragments.size(); j++)
-		{
+			{
 				//grab a second brick to compare
 				OpenBabel::OBMol* frag2 = fragments[j];
 				
@@ -153,7 +154,7 @@
 				if (tc > TC_THRESHOLD){
 					similarities.push_back(frag2);
 				}
-		}
+			}
 			//add a new map entry before the next iteration
 			frequencyMap.insert(pair<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>(frag1, similarities));
 		}
