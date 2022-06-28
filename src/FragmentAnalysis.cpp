@@ -211,8 +211,8 @@
 		//printMap(linkerMap);
 		//std::cout << std::endl;
 		
-		distributionBrick  = distributionAnalysis(_bricks[0], _bricks);
-		distributionLinker = distributionAnalysis(_linkers[0], _linkers);
+		map<double, int> distributionBrick  = distributionAnalysis(_bricks[0], _bricks);
+		map<double, int> distributionLinker = distributionAnalysis(_linkers[0], _linkers);
 		
 		printMap(distributionBrick);
 		printMap(distributionLinker);
