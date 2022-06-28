@@ -13,6 +13,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <cctype>
+#include <cmath>
 //#include <mcheck.h>
 
 
@@ -148,6 +149,36 @@
 		
 	}
 	
+	map<double, int> FragmentAnalysis::distributionAnalysis(OpenBabel::OBMol* subject, std::vector<OpenBabel::OBMol*>& fragments){
+		std::vector<double> coefficients{0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
+		map<double, int> distribution;
+		double tc;
+		OpenBabel::OBMol* fragment;
+		
+		//populate the map
+		for (unsigned x = 0, x < coefficents.size(); x++)
+		{
+			distribution.insert(pair<double, int>(coefficents[x], 0));
+		}
+		
+		//compare each brick to the subject and note the tc value between the two molecules
+		for (unsigned y = 0, y < fragments.size(); y++)
+		{
+			fragment = fragments[y];
+			tc = tanimotoCalc(subject, frag2);
+			
+			tc *= 10;
+			int temp = floor(tc);
+			tc = temp * 0.10;
+			
+			temp = distribution.find(tc) + 1
+			distribution.insert(pair<double, int>(tc, temp));
+		}
+		
+		return distribution;
+		
+	}
+	
 	void FragmentAnalysis::printMap(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map)
 	{
 		//for every pair in the map, print its name and the nummber of elements similar
@@ -164,23 +195,29 @@
 	void FragmentAnalysis::doFragmentAnalysis(){
 		
 		//create two maps
-		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
-		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
+		//map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
+		//map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
 		
 		//run a frequency analysis on the two sets
-		brickMap  = freqAnalysis(FragmentAnalysis::_bricks);
-		linkerMap = freqAnalysis(FragmentAnalysis::_linkers);
+		//brickMap  = freqAnalysis(FragmentAnalysis::_bricks);
+		//linkerMap = freqAnalysis(FragmentAnalysis::_linkers);
 		
 		//print the contents
-		std::cout<<"Brick Map contents: ";
-		printMap(brickMap);
-		std::cout << std::endl;
+		//std::cout<<"Brick Map contents: ";
+		//printMap(brickMap);
+		//std::cout << std::endl;
 		
-		std::cout<<"Linker Map contents: ";
-		printMap(linkerMap);
-		std::cout << std::endl;
+		//std::cout<<"Linker Map contents: ";
+		//printMap(linkerMap);
+		//std::cout << std::endl;
 		
-		writeReport("brick-report.txt", brickMap);
-		writeReport("linker-report.txt", linkerMap);
+		distributionBrick  = distributionAnalysis(_bricks[0], _bricks);
+		distributionLinker = distributionAnalysis(_linkers[0], _linkers);
+		
+		printMap(distributionBrick);
+		printMap(distributionLinker);
+		
+		//writeReport("brick-report.txt", brickMap);
+		//writeReport("linker-report.txt", linkerMap);
 		
 	}

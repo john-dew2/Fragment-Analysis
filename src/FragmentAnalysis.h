@@ -15,6 +15,7 @@ class FragmentAnalysis{
 		void printMap(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map);
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> freqAnalysis(std::vector<OpenBabel::OBMol*>& fragments);
 		void doFragmentAnalysis();
+		map<double, int> distributionAnalysis(OpenBabel::OBMol* subject, std::vector<OpenBabel::OBMol*>& fragments);
 		
 	private:
 		std::vector<OpenBabel::OBMol*>& _linkers;
