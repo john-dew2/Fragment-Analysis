@@ -253,7 +253,7 @@ void readMoleculeFile(const char* fileName)
 		}
 			
 			//COME BACK AND FIX
-			delete mol;
+			//delete mol;
 	}
 }
 
