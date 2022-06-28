@@ -138,6 +138,17 @@
 			std::cout << name << ": " << length << " fragments similar, ";
 		}
     }
+	
+	void FragmentAnalysis::printDistribution(map<double, int>> map)
+	{
+		//for every pair in the map, print its name and the nummber of elements similar
+		for (const auto& pair : map) 
+		{
+			int category = pair.first;
+			int amount = pair.second;
+			std::cout << "Tanimoto Coefficient: " << name << ", contains " << length << " fragments." << std::endl;
+		}
+	}
 
 
 	//
@@ -236,6 +247,9 @@
 		map<double, int> distributionBrick  = distributionAnalysis(_bricks[0], _bricks);
 		map<double, int> distributionLinker = distributionAnalysis(_linkers[0], _linkers);
 		
+		printDistribution(distributionBrick);
+		printDistribution(distributionLinker);
+
 		//printMap(distributionBrick);
 		//printMap(distributionLinker);
 		

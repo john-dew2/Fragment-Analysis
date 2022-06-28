@@ -51,21 +51,15 @@
 //
 #include "OBWriter.h"
 #include "Options.h"
-//#include "Validator.h"
-
 
 //
 // Synthesis-Based Functionality
 //
-//#include "HyperGraph.h"
 #include "EdgeAnnotation.h"
-//#include "Instantiator.h"
 
-//#include "PebblerHyperGraph.h"
 #include "Utilities.h"
 #include "IdFactory.h"
 #include "Constants.h"
-
 #include "FragmentAnalysis.h"
 
 
@@ -284,85 +278,59 @@ bool readInputFiles(const Options& options)
 
 int main(int argc, char** argv)
 {	
-  if (argc < 2)
-  {
-    std::cerr << "Usage: <program> [SDF-file-list] -o <output-file> -v <validation-file>"
-              << " -pool <#obgen-threads>" << std::endl;
-    return 1;
-  }
-
-    //
-    // Remove log files from a previous run.
-    //
-
-    // system("rm molecules.smi");
-    // system("rm synth_log_initial_fragments_logfile.txt");
-    // system("rm ScrubAndExportSMI_logfile.txt");
-    // system("rm Validation_logfile.txt");
+	if (argc < 2)
+	{
+		std::cerr << "Usage: <program> [SDF-file-list] -o <output-file> -v <validation-file>"
+				  << " -pool <#obgen-threads>" << std::endl;
+		return 1;
+	}
 
     //
     // Global options object.
     //
-  Options options(argc, argv);
-  if (!options.parseCommandLine())
-  {
-    std::cerr << "Command-line parsing failed; exiting." << std::endl;
-    return 1;
-  }
+	Options options(argc, argv);
+	if (!options.parseCommandLine())
+	{
+		std::cerr << "Command-line parsing failed; exiting." << std::endl;
+		return 1;
+	}
 
     // 
     // Output command-line option information
     //
-  if (Options::THREADED) std::cout << "Threaded execution :P." << std::endl;
-  else if (Options::SERIAL) std::cout << "Serial execution." << std::endl;
-  else
-  {
-    std::cerr << "Neither serial nor threaded specified; exiting." << std::endl;
-    return 1;
-  }
+	if (Options::THREADED) std::cout << "Threaded execution :P." << std::endl;
+	else if (Options::SERIAL) std::cout << "Serial execution." << std::endl;
+	else
+	{
+		std::cerr << "Neither serial nor threaded specified; exiting." << std::endl;
+		return 1;
+	}
 
     // std::cout << "SMI Comparison Level: " << Options::SMI_LEVEL_BOUND << std::endl;
-  std::cout << "Probability Filtration Level: "
-            << Options::PROBABILITY_PRUNE_LEVEL_START << std::endl;
+	std::cout << "Probability Filtration Level: "
+			  << Options::PROBABILITY_PRUNE_LEVEL_START << std::endl;
 
     // Printing the specified Tanimoto value to the user.
     // std::cerr << "Tanimoto Coefficient Threshold Specified: "
     //           << Options::TANIMOTO << std::endl;
-  if (!Options::SMI_ONLY)
-  {
-    std::cerr << "OBGEN output thread pool size: "
-              << Options::OBGEN_THREAD_POOL_SIZE << std::endl;
-  }
-	if (!readInputFiles(options)) {
+	if (!Options::SMI_ONLY)
+	{
+		std::cerr << "OBGEN output thread pool size: "
+				  << Options::OBGEN_THREAD_POOL_SIZE << std::endl;
+	}
+	if (!readInputFiles(options)) 
+	{
 		std::cout << "Did not read input files" <<std:: endl;
 		return 1;
-  }
-
-    //
-    // Bypass synthesis for acquiring information about the input fragments.
-    //    
-  if (g_calculate_lipinski_descriptors_for_input_fragments_only)
-  {
-    std::cout << "Calculated Lipinski Descriptors for input fragments, now exiting early."
-              << " (Flag set in Constants.h)" << std:: endl;
-    return 0;
-  }
+	}    
 	
-    //Added 6/23 - Dewey
+	//Added 6/23 - Dewey
+	FragmentAnalysis analyzer(linkmol, brickmol);
+	analyzer.doAnalysis();
       
-  FragmentAnalysis analyzer(linkmol, brickmol);
-  //cout << linkmol.size();
-  //cout << brickmol.size();
-  analyzer.doAnalysis();
-      
-    //exit main
-  Cleanup(linkers, bricks);
+	Cleanup(linkers, bricks);
     
-    //Cleanup(linkmol, brickmol);
-
-    //}
-
-  return 0;
+	return 0;
 }
 
 void Cleanup(std::vector<Linker*>& linkers, std::vector<Brick*>& bricks)
