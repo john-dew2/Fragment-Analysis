@@ -202,6 +202,7 @@
 		{
 			distribution.insert(pair<double, int>(coefficients[x], 0));
 		}
+		cout << distribution.size() << std::endl;
 		
 		//for all the fragments
 		for (unsigned y = 0; y < fragments.size(); y++)
