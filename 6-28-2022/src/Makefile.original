@@ -16,7 +16,10 @@
 #
 
 CC=g++ 
-OPT= -Wall -O2 -fpermissive 
+OPT= -Wall $(shell /usr/bin/python2.7-config --cflags) -O2 -fpermissive 
+
+#Flags desired by / for python
+PYTHON_LINKER= $(shell /usr/bin/python2.7-config --ldflags)
 
 #Path to openbabel directory which contains the header (.h) files 
 OB_INC= /usr/local/include/openbabel-2.0 
@@ -24,16 +27,27 @@ OB_INC= /usr/local/include/openbabel-2.0
 #Path to openbabel directory which contains the (.so) files 
 OB_LIB= /usr/local/lib
 
+# PYTHON development path
+PYTHON_INC= /usr/include/python2.7
+
+#Path to the Python Numpy files for SA scoring / filtering
+NUMPY_INC= /usr/lib/python2.7/dist-packages/numpy/core/include
+
+#Path to theano (for deep-learning)
+THEANO_PY= /usr/lib/python2.7/dist-packages/theano
+
 GSL_LIB=/usr/include/gsl
 GSL_INC=/usr/include/
 EXE = esynth
 
-CFLAGS= $(OPT) -I$(GSL_INC) -L$(GSL_LIB) -I$(OB_INC) -L$(OB_LIB) -lz -lgsl -lgslcblas -lopenbabel -lpthread
+CFLAGS= $(OPT) -I$(PYTHON_INC) -I$(GSL_INC) -I$(NUMPY_INC) -L$(GSL_LIB) -I$(OB_INC) -L$(OB_LIB) -lz -lgsl -lgslcblas -lopenbabel -lpthread
 
 
 ODIR=./obj
 
 DEPS = EdgeAggregator.h \
+	EdgeAnnotation.h \
+	Instantiator.h \
 	Linker.h \
 	Molecule.h \
 	Brick.h \
@@ -46,15 +60,21 @@ DEPS = EdgeAggregator.h \
 	AtomT.h \
 	OBWriter.h \
 	Options.h \
+	Validator.h \
 	obgen.h \
 	Thread_Pool.h \
-	Constants.h \
 	IdFactory.h \
+	Constants.h \
+	LevelHashMap.h \
 	LikeMoleculesContainer.h \
+	MoleculeHashHypergraph.h \
 	MinimalMolecule.h \
 	SmiMinimalMolecule.h \
 	FixedSortedList.h \
-	FragmentAnalysis.h \
+	EdgeDatabase.h \
+	FragmentEdgeMap.h \
+	SimpleFragmentGraph.h \
+	PythonInterface.h \
 	zpipe.h \
 	bloom_filter.hpp
 
@@ -65,6 +85,7 @@ _WRITER_DEPS = compliantwriter.h
 _TOSMI_DEPS = convertToSMI.h 
 
 _OBJ = Atom.o \
+	Instantiator.o \
 	Linker.o\
 	Main.o \
 	Molecule.o \
@@ -74,14 +95,16 @@ _OBJ = Atom.o \
 	ConnectableAtom.o \
 	LinkerConnectableAtom.o \
 	BrickConnectableAtom.o \
-	IdFactory.o \
 	Bond.o \
 	AtomT.o \
 	OBWriter.o \
+	Validator.o \
 	Options.o \
+	IdFactory.o \
 	obgen.o \
+	PythonInterface.o \
 	Constants.o \
-	FragmentAnalysis.o \
+	FragmentEdgeMap.o \
 	zpipe.o
 
 
@@ -91,7 +114,7 @@ $(ODIR)/%.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(EXE): $(OBJ)
-	$(CC) $^ $(CFLAGS) -o $@
+	$(CC) $^ $(CFLAGS) $(PYTHON_LINKER) -o $@
 
 
 

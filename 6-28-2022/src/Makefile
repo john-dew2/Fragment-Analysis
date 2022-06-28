@@ -34,6 +34,8 @@ CFLAGS= $(OPT) -I$(GSL_INC) -L$(GSL_LIB) -I$(OB_INC) -L$(OB_LIB) -lz -lgsl -lgsl
 ODIR=./obj
 
 DEPS = EdgeAggregator.h \
+	EdgeAnnotation.h \
+	Instantiator.h \
 	Linker.h \
 	Molecule.h \
 	Brick.h \
@@ -46,16 +48,22 @@ DEPS = EdgeAggregator.h \
 	AtomT.h \
 	OBWriter.h \
 	Options.h \
+	Validator.h \
 	obgen.h \
 	Thread_Pool.h \
-	Constants.h \
 	IdFactory.h \
+	Constants.h \
+	LevelHashMap.h \
 	LikeMoleculesContainer.h \
+	MoleculeHashHypergraph.h \
 	MinimalMolecule.h \
 	SmiMinimalMolecule.h \
 	FixedSortedList.h \
-	FragmentAnalysis.h \
+	EdgeDatabase.h \
+	FragmentEdgeMap.h \
+	SimpleFragmentGraph.h \
 	zpipe.h \
+	Analysis.h \
 	bloom_filter.hpp
 
 _OBGEN_DEPS = obgen.h 
@@ -65,6 +73,7 @@ _WRITER_DEPS = compliantwriter.h
 _TOSMI_DEPS = convertToSMI.h 
 
 _OBJ = Atom.o \
+	Instantiator.o \
 	Linker.o\
 	Main.o \
 	Molecule.o \
@@ -74,17 +83,18 @@ _OBJ = Atom.o \
 	ConnectableAtom.o \
 	LinkerConnectableAtom.o \
 	BrickConnectableAtom.o \
-	IdFactory.o \
 	Bond.o \
 	AtomT.o \
 	OBWriter.o \
+	Validator.o \
 	Options.o \
+	IdFactory.o \
 	obgen.o \
 	Constants.o \
+	FragmentEdgeMap.o \
 	FragmentAnalysis.o \
 	zpipe.o
-
-
+	
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.cpp $(DEPS)

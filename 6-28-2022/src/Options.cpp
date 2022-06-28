@@ -26,6 +26,7 @@
 #include "Options.h"
 #include "Constants.h"
 
+bool FREQUENCY_ANALYSIS_ONLY = true;
 
 double Options::TANIMOTO = 0.95;
 std::string Options::shmPath = "/run/shm";
@@ -35,6 +36,7 @@ bool Options::SERIAL = true;
 bool Options::OPENBABEL = true;
 bool Options::SMI_ONLY = false;
 bool Options::USE_LIPINSKI = false;
+bool Options::FREQUENCY_ANALYSIS_ONLY = true;
 unsigned Options::OBGEN_THREAD_POOL_SIZE = 15;
 //unsigned Options::SMI_LEVEL_BOUND = 3;
 unsigned Options::PROBABILITY_PRUNE_LEVEL_START = 5;
@@ -260,6 +262,12 @@ bool Options::handleOption(int& index)
     {
         if (strcmp(argv[index], "-lip") == 0)
             USE_LIPINSKI = true;
+        return true;
+    }
+	//Added 6/24 - Dewey
+	    if (strncmp(argv[index], "-dofa", 5) == 0)
+    {
+        Options::FREQUENCY_ANALYSIS_ONLY = true;
         return true;
     }
 

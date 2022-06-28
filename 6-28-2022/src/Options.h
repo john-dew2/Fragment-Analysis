@@ -44,6 +44,7 @@ class Options
     static bool SERIAL;
     static bool OPENBABEL;
     static bool USE_LIPINSKI;
+	static bool FREQUENCY_ANALYSIS_ONLY;
     //static unsigned SMI_LEVEL_BOUND;
     static unsigned PROBABILITY_PRUNE_LEVEL_START;
     static unsigned int OBGEN_THREAD_POOL_SIZE;
