@@ -86,9 +86,9 @@
 
 	void FragmentAnalysis::writeReport(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map)
 	{
-		char* name;
+		const char* name;
 		int numSimilar;
-		char* similarNames;
+		const char* similarNames;
 		std::vector<OpenBabel::OBMol*> molVector;
 		
 		// Create and open a text file
@@ -100,11 +100,11 @@
 			molVector = pair.second;
 			numSimilar = molVector.size();
 			
-			for (i = 0; i < numSimilar; i++)
+			for (unsigned i = 0; i < numSimilar; i++)
 			{
 				similarNames += molVector[i]->GetTitle();
 			}
-			reportFile << name << " has " << numSimilar << " similar elements. Their names are: " << similarNames
+			reportFile << name << " has " << numSimilar << " similar elements. Their names are: " << similarNames;
 		}
 	
 
@@ -134,7 +134,7 @@
 				OpenBabel::OBMol* frag2 = fragments[j];
 				
 				//find the tc and add the brick to the list if the tc value is > the threshold
-				tc = tanimoto_calc(frag1, frag2);
+				tc = tanimotoCalc(frag1, frag2);
 				if (tc > TC_THRESHOLD){
 					similarities.push_back(frag2);
 				}
