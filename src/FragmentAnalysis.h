@@ -19,7 +19,7 @@ class FragmentAnalysis{
 		
 		//output functions
 		void writeFreqReport(std::string fileName, map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>);
-		void writeDistReport(std::string fileName, map<double, int> map)
+		void writeDistReport(std::string fileName, map<double, int> map);
 		void printMap(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map);
 		void printDistribution(map<double, int> map);
 		
