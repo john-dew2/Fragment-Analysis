@@ -47,6 +47,7 @@ class Options
 	static bool FREQUENCY_ANALYSIS;
 	static bool DISTRIBUTION_ANALYSIS;
 	static bool IS_SUBJECT_FILE;
+	static bool VALIDATE;
     //static unsigned SMI_LEVEL_BOUND;
     static unsigned PROBABILITY_PRUNE_LEVEL_START;
     static unsigned int OBGEN_THREAD_POOL_SIZE;
