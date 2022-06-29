@@ -275,7 +275,7 @@ bool Options::handleOption(int& index)
 	{
 		if (strcmp(argv[index], "-dist") == 0)
             DISTRIBUTION_ANALYSIS = true;
-			IS_SUBJECT_FILE = true
+			IS_SUBJECT_FILE = true;
         return true;
 	}
 
