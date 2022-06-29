@@ -266,7 +266,7 @@ void readMoleculeFile(const char* fileName)
         else std::cerr << "Main: predictLipinski failed somehow!" << endl;
 		*/
 
-        if (g_debug_output) std::cout << "Local: " << *local << "|" << std::endl;
+        //if (g_debug_output) std::cout << "Local: " << *local << "|" << std::endl;
     
         // Add to the linker or brick list as needed.
         //addLocalMolecule(tolower(fileName[0]), local); 
