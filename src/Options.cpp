@@ -138,7 +138,7 @@ bool Options::handleOption(int& index)
     }
     if (strcmp(argv[index], "-v") == 0)
     {
-        VALIDATE = true;
+        Options::VALIDATE = true;
         validationFile = argv[++index];
         return true;
     }
@@ -270,16 +270,16 @@ bool Options::handleOption(int& index)
 	if (strncmp(argv[index], "-freq", 4) == 0)
 	{
 		if (strcmp(argv[index], "-freq") == 0)
-            FREQUENCY_ANALYSIS = true;
-			IS_SUBJECT_FILE = false;
+            Options::FREQUENCY_ANALYSIS = true;
+			Options::IS_SUBJECT_FILE = false;
         return true;
 	}
 		
 	if (strncmp(argv[index], "-dist", 4) == 0)
 	{
 		if (strcmp(argv[index], "-dist") == 0)
-            DISTRIBUTION_ANALYSIS = true;
-			IS_SUBJECT_FILE = true;
+            Options::DISTRIBUTION_ANALYSIS = true;
+			Options::IS_SUBJECT_FILE = true;
         return true;
 	}
 
