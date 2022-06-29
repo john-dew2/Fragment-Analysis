@@ -105,9 +105,9 @@
 		//for each entry in the map
 		for (const auto& pair : map) 
 		{
-			tanimoto = pair.first
-			occurances = pair.second
-			std::cout << "Tanimoto Coefficient: " << category << ", contains " << amount << " fragments." << std::endl;
+			tanimoto = pair.first;
+			occurances = pair.second;
+			std::cout << "Tanimoto Coefficient: " << tanimoto << ", contains " << occurances << " fragments." << std::endl;
 		}
 		// Close the file
 		reportFile.close();
