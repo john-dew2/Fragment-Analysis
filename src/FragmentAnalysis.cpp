@@ -141,6 +141,8 @@
 	
 	void FragmentAnalysis::printDistribution(map<double, int> map)
 	{
+		std::cout <<
+		
 		//for every pair in the map, print its name and the nummber of elements similar
 		for (const auto& pair : map) 
 		{
@@ -190,7 +192,6 @@
 	//	
 	map<double, int> FragmentAnalysis::distributionAnalysis(OpenBabel::OBMol* subject, std::vector<OpenBabel::OBMol*>& fragments)
 	{
-
 		std::vector<double> coefficients{0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
 		map<double, int> distribution;
 		double tanimoto;
@@ -202,8 +203,6 @@
 		{
 			distribution.insert(pair<double, int>(coefficients[x], 0));
 		}
-		cout << "size of map: " << distribution.size() << std::endl;
-		cout << "size of list: " << fragments.size() << std::endl;
 		
 		//for all the fragments
 		for (unsigned y = 0; y < fragments.size(); y++)
@@ -218,12 +217,9 @@
 			//add one to the map entry and reinsert it
 			temp = 0;
 			temp = distribution[tanimoto] + 1;
-			cout << tanimoto << " " << temp << std::endl;
 			distribution[tanimoto] = temp;
 		}
-		
 		return distribution;
-		
 	}
 
 

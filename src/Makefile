@@ -26,7 +26,7 @@ OB_LIB= /usr/local/lib
 
 GSL_LIB=/usr/include/gsl
 GSL_INC=/usr/include/
-EXE = esynth
+EXE = efreq
 
 CFLAGS= $(OPT) -I$(GSL_INC) -L$(GSL_LIB) -I$(OB_INC) -L$(OB_LIB) -lz -lgsl -lgslcblas -lopenbabel -lpthread
 
