@@ -64,11 +64,11 @@
 
 
 //
-// Global set of linkers and bricks read from the input files.
+// Global set of linkers and bricks read from the input files, and another global set to store the molecules
+// Global string and molecule to represent the file name and actual molecular object that will be the subject of distribution analysis
 //
 std::vector<Linker*> linkers;
 std::vector<Brick*> bricks;
-
 std::vector<OpenBabel::OBMol*> brickmol;
 std::vector<OpenBabel::OBMol*> linkmol;
 std::string subject_file;
@@ -122,6 +122,11 @@ bool splitMolecule(std::ifstream& infile, std::string& name,
     return true;
 }
 
+//
+// Given a molecule (mol )and its extraneous information (mtype, name, suffix), convert it to a
+// local linker or brick, and feed the information as data for the actual molecular object (mol)
+//
+/*
 Molecule* createLocalMolecule(OpenBabel::OBMol* mol, MoleculeT mType,
                               const std::string& name, std::string& suffix)
 {
@@ -147,8 +152,13 @@ Molecule* createLocalMolecule(OpenBabel::OBMol* mol, MoleculeT mType,
     
     return 0;
 }
+*/
 
-void addMolecule(char type, Molecule* molecule)
+//
+// Takes a molecule and its type and appends it to either the linker, bricks, or the catch all category
+//
+/*
+void addLocalMolecule(char type, Molecule* molecule)
 {
     // linker
     if (type == 'l')
@@ -166,10 +176,32 @@ void addMolecule(char type, Molecule* molecule)
                   << type << "Expected: l->linker, b->brick" << std::endl;
     }
 }
+*/
+
+//
+// Takes a molecule and its type and appends it to either the linker, bricks, or the catch all category
+//
+void addOBMolecule(char type, Molecule* molecule)
+{
+	//if we are intrested in distribution analysis, then the first file will be our subject
+	if (Options::IS_SUBJECT_FILE)
+	{
+		Options::IS_SUBJECT_FILE = false;
+		subject = mol;			
+	}
+	if (type == 'l')
+	{
+		linkmol.push_back(mol);
+	}
+	// brick or brick
+	else if (type == 'r' || type == 'b')
+	{
+		brickmol.push_back(mol);        
+	}
+}
 
 void readMoleculeFile(const char* fileName)
 {
-    //cout << "Reading Files..." << std::endl;
 	//
     // Input parser conversion functionality for Open babel
     //
@@ -210,11 +242,10 @@ void readMoleculeFile(const char* fileName)
 		obConversion.ReadString(mol, prefix);
 
         // Assign all needed data to the molecule (comment data)
-        Molecule* local = createLocalMolecule(mol,
-                                              tolower(fileName[0]) == 'l' ? LINKER : BRICK,
-                                              name, suffix);
+        //Molecule* local = createLocalMolecule(mol,
+         //                                     tolower(fileName[0]) == 'l' ? LINKER : BRICK,
+         //                                     name, suffix);
 
-//std::cerr << *local << std::endl;
 
         // calculate the molecular weight, H donors and acceptors and the plogp
         //local->openBabelPredictLipinski();
@@ -236,27 +267,13 @@ void readMoleculeFile(const char* fileName)
         if (g_debug_output) std::cout << "Local: " << *local << "|" << std::endl;
     
         // Add to the linker or brick list as needed.
-        addMolecule(tolower(fileName[0]), local); 
+        //addLocalMolecule(tolower(fileName[0]), local); 
+		
+		addOBMolecule(tolower(fileName[0]), mol); 
 
-        // DEWEY 6/27: dont delete the molecule, instead save it to either the brick or linker list
-		if (Options::IS_SUBJECT_FILE)
-		{
-			Options::IS_SUBJECT_FILE = false;
-			subject = mol;
 			
-		}
-		if (fileName[0] == 'l')
-		{
-			linkmol.push_back(mol);
-		}
-		// brick or brick
-		else if (fileName[0] == 'r' || fileName[0] == 'b')
-		{
-			brickmol.push_back(mol);        
-		}
-			
-			//COME BACK AND FIX
-			//delete mol;
+		//COME BACK AND FIX
+		//delete mol;
 	}
 }
 
