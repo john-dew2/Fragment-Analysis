@@ -154,29 +154,6 @@ Molecule* createLocalMolecule(OpenBabel::OBMol* mol, MoleculeT mType,
 }
 */
 
-//
-// Takes a molecule and its type and appends it to either the linker, bricks, or the catch all category
-//
-/*
-void addLocalMolecule(char type, Molecule* molecule)
-{
-    // linker
-    if (type == 'l')
-    {
-        linkers.push_back(static_cast<Linker*>(molecule));        
-    }
-    // brick or brick
-    else if (type == 'r' || type == 'b')
-    {
-        bricks.push_back(static_cast<Brick*>(molecule));        
-    }
-    else
-    {
-        std::cerr << "Unrecognized file prefix: "
-                  << type << "Expected: l->linker, b->brick" << std::endl;
-    }
-}
-*/
 
 //
 // Takes a molecule and its type and appends it to either the linker, bricks, or the catch all category
@@ -238,17 +215,12 @@ void readMoleculeFile(const char* fileName)
 
         // Create and parse using Open Babel
         OpenBabel::OBMol* mol = new OpenBabel::OBMol();
-        //bool notAtEnd = 
 		obConversion.ReadString(mol, prefix);
 
         // Assign all needed data to the molecule (comment data)
         //Molecule* local = createLocalMolecule(mol,
          //                                     tolower(fileName[0]) == 'l' ? LINKER : BRICK,
          //                                     name, suffix);
-
-
-        // calculate the molecular weight, H donors and acceptors and the plogp
-        //local->openBabelPredictLipinski();
 
         // add to logfile
 		/*
@@ -265,12 +237,8 @@ void readMoleculeFile(const char* fileName)
         }
         else std::cerr << "Main: predictLipinski failed somehow!" << endl;
 		*/
-
-        //if (g_debug_output) std::cout << "Local: " << *local << "|" << std::endl;
     
         // Add to the linker or brick list as needed.
-        //addLocalMolecule(tolower(fileName[0]), local); 
-		
 		addOBMolecule(tolower(fileName[0]), mol); 
 
 			
@@ -285,11 +253,13 @@ void readMoleculeFile(const char* fileName)
 //
 bool readInputFiles(const Options& options)
 {
+	/*
 	if (Options::DISTRIBUTION_ANALYSIS){
 		subject_file = options.inFiles.front();
 		options.inFiles.erase(options.inFiles.begin());
 		
 	}
+	*/
 	
     for (std::vector<std::string>::const_iterator it = options.inFiles.begin();
          it != options.inFiles.end(); it++)
@@ -343,9 +313,7 @@ int main(int argc, char** argv)
 	std::cout << "Probability Filtration Level: "
 			  << Options::PROBABILITY_PRUNE_LEVEL_START << std::endl;
 
-    // Printing the specified Tanimoto value to the user.
-    // std::cerr << "Tanimoto Coefficient Threshold Specified: "
-    //           << Options::TANIMOTO << std::endl;
+
 	if (!Options::SMI_ONLY)
 	{
 		std::cerr << "OBGEN output thread pool size: "
