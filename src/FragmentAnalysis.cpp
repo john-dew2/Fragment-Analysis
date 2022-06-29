@@ -141,8 +141,6 @@
 	
 	void FragmentAnalysis::printDistribution(map<double, int> map)
 	{
-		std::cout <<
-		
 		//for every pair in the map, print its name and the nummber of elements similar
 		for (const auto& pair : map) 
 		{
@@ -229,30 +227,27 @@
 	void FragmentAnalysis::doAnalysis(){
 		
 		//create two maps
-		//map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
-		//map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
+		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
+		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
 		
 		//run a frequency analysis on the two sets
-		//brickMap  = fragmentAnalysis(FragmentAnalysis::_bricks);
-		//linkerMap = fragmentAnalysis(FragmentAnalysis::_linkers);
+		brickMap  = fragmentAnalysis(FragmentAnalysis::_bricks);
+		linkerMap = fragmentAnalysis(FragmentAnalysis::_linkers);
 		
 		//print the contents
-		//std::cout<<"Brick Map contents: ";
-		//printMap(brickMap);
-		//std::cout << std::endl;
+		std::cout<<"Brick Map contents: ";
+		printMap(brickMap);
+		std::cout << std::endl;
 		
-		//std::cout<<"Linker Map contents: ";
-		//printMap(linkerMap);
-		//std::cout << std::endl;
+		std::cout<<"Linker Map contents: ";
+		printMap(linkerMap);
+		std::cout << std::endl;
 		
 		map<double, int> distributionBrick  = distributionAnalysis(_bricks[0], _bricks);
 		map<double, int> distributionLinker = distributionAnalysis(_linkers[0], _linkers);
 		
 		printDistribution(distributionBrick);
 		printDistribution(distributionLinker);
-
-		//printMap(distributionBrick);
-		//printMap(distributionLinker);
 		
 		//writeReport("brick-report.txt", brickMap);
 		//writeReport("linker-report.txt", linkerMap);
