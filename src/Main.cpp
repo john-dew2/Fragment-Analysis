@@ -268,7 +268,6 @@ bool readInputFiles(const Options& options)
 {
 	if (Options::DISTRIBUTION_ANALYSIS){
 		subject_file = options.inFiles.front();
-		readMoleculeFile(subject_file);
 		options.inFiles.erase(options.inFiles.begin());
 		
 	}
