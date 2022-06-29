@@ -239,9 +239,9 @@ void readMoleculeFile(const char* fileName)
         addMolecule(tolower(fileName[0]), local); 
 
         // DEWEY 6/27: dont delete the molecule, instead save it to either the brick or linker list
-		if (Constants::IS_SUBJECT_FILE)
+		if (Options::IS_SUBJECT_FILE)
 		{
-			Constants::IS_SUBJECT_FILE = false;
+			Options::IS_SUBJECT_FILE = false;
 			subject = mol;
 			
 		}
@@ -268,7 +268,8 @@ bool readInputFiles(const Options& options)
 {
 	if (Options::DISTRIBUTION_ANALYSIS){
 		subject_file = options.inFiles.front();
-		inFiles.erase(options.inFiles.begin());
+		readMoleculeFile(subject_file);
+		options.inFiles.erase(options.inFiles.begin());
 		
 	}
 	
