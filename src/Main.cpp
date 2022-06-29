@@ -251,6 +251,7 @@ void readMoleculeFile(const char* fileName)
         //local->openBabelPredictLipinski();
 
         // add to logfile
+		/*
         if (Molecule::isOpenBabelLipinskiCompliant(*mol))
         {
             std::ofstream logfile("synth_log_initial_fragments_logfile.txt",
@@ -263,6 +264,7 @@ void readMoleculeFile(const char* fileName)
             logfile.close();
         }
         else std::cerr << "Main: predictLipinski failed somehow!" << endl;
+		*/
 
         if (g_debug_output) std::cout << "Local: " << *local << "|" << std::endl;
     
