@@ -53,7 +53,7 @@ extern double LOGP_UPPERBOUND;
 
 extern std::string DEFAULT_OUTPUT_DIR;
 
-bool IS_SUBJECT_FILE;
+extern bool IS_SUBJECT_FILE;
 
 extern bool VALIDATE;
 

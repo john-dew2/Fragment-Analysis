@@ -267,8 +267,8 @@ void readMoleculeFile(const char* fileName)
 bool readInputFiles(const Options& options)
 {
 	if (Options::DISTRIBUTION_ANALYSIS){
-		subject_file = inFiles.front();
-		inFiles.erase(inFiles.begin);
+		subject_file = options.inFiles.front();
+		inFiles.erase(options.inFiles.begin());
 		
 	}
 	

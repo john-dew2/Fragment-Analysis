@@ -21,7 +21,7 @@ class FragmentAnalysis{
 	private:
 		std::vector<OpenBabel::OBMol*>& _linkers;
 		std::vector<OpenBabel::OBMol*>& _bricks;
-		OpenBabel::OBMol* _subject
+		OpenBabel::OBMol* _subject;
 };
 
 // void Analysis::doFrequencyAnalysis(std::vector<OpenBabel::OBMol*>& linkerList, std::vector<OpenBabel::OBMol*>& brickList){
