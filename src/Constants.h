@@ -1,5 +1,10 @@
 /*
- *  This file is part of esynth.
+ *  This file is part of FrequencyAnalysis.
+ *	File provides a variety of constants present within the code.
+ *
+ *  Author: Chris Alvin
+ *  Edited By: Johnathan Dewey
+ *  Date: June 29th 2022
  *
  *  esynth is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

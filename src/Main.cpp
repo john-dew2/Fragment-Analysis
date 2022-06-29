@@ -1,5 +1,10 @@
 /*
- *  This file is part of esynth.
+ *  This file is part of FrequencyAnalysis.
+ *	File comntains the main executable for the program and functions that aid in processing molecules into data.
+ *
+ *  Author: Chris Alvin
+ *  Edited By: Johnathan Dewey
+ *  Date: June 29th 2022
  *
  *  esynth is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -224,7 +229,6 @@ void readMoleculeFile(const char* fileName)
         Molecule* local = createLocalMolecule(mol, tolower(fileName[0]) == 'l' ? LINKER : BRICK, name, suffix);
 
         // add to logfile
-		
         if (Molecule::isOpenBabelLipinskiCompliant(*mol))
         {
             std::ofstream logfile("synth_log_initial_fragments_logfile.txt",
@@ -254,11 +258,12 @@ void readMoleculeFile(const char* fileName)
 //
 bool readInputFiles(const Options& options)
 {
-	
+	//iterate over every file
     for (std::vector<std::string>::const_iterator it = options.inFiles.begin();
          it != options.inFiles.end(); it++)
     {
         char charPrefix = tolower((*it)[0]); 
+		//if there exists a file with no l or b or r as a prefix, send an error to the user
         if (charPrefix != 'l' && charPrefix != 'r' && charPrefix != 'b')
         {
             cerr << "Unexpected file prefix: \'" << (*it)[0]
@@ -266,6 +271,7 @@ bool readInputFiles(const Options& options)
             return false;
         }
 
+		//send each successful file to be read into data
         readMoleculeFile((*it).c_str());
     }
 
@@ -275,6 +281,7 @@ bool readInputFiles(const Options& options)
 
 int main(int argc, char** argv)
 {	
+	//if there are less than two arguments in the command line then send out the format of the command line
 	if (argc < 2)
 	{
 		std::cerr << "Usage: <program> [SDF-file-list] -o <output-file> -v <validation-file>"
@@ -286,6 +293,8 @@ int main(int argc, char** argv)
     // Global options object.
     //
 	Options options(argc, argv);
+	
+	//parse the command line to determine what it is the user wants to do
 	if (!options.parseCommandLine())
 	{
 		std::cerr << "Command-line parsing failed; exiting." << std::endl;
@@ -313,16 +322,19 @@ int main(int argc, char** argv)
 		std::cerr << "OBGEN output thread pool size: "
 				  << Options::OBGEN_THREAD_POOL_SIZE << std::endl;
 	}
+	
+	//read the files and put them into lists
 	if (!readInputFiles(options)) 
 	{
 		std::cout << "Did not read input files" <<std:: endl;
 		return 1;
 	}    
 	
-	//Added 6/23 - Dewey
+	//create a new analyzer object and run an analysis on the data
 	FragmentAnalysis analyzer(linkmol, brickmol, subject);
 	analyzer.doAnalysis();
       
+	//cleanup the lists after processing
 	Cleanup(linkers, bricks);
     
 	return 0;

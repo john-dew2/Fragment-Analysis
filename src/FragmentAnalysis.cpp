@@ -1,5 +1,13 @@
-//FrequencyAnalysis.cpp
-//Author: Johnathan Dewey
+/*
+ *  FragmentAnalysis.cpp
+ *  This file is part of FrequencyAnalysis.
+ *
+ *	File takes in a set of bricks and linkers and, if needed, a single molecule. The file then analyzes the sets
+ *	and shows the distibution of tanimoto values, and a report of which fragments have similarities to other fragments.
+ *
+ *	Author: Johnathan Dewey
+ *  Date: June 29th 2022
+ */
 
 #include <vector>
 #include<iterator> // for iterators
