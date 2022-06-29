@@ -71,6 +71,8 @@ std::vector<Brick*> bricks;
 
 std::vector<OpenBabel::OBMol*> brickmol;
 std::vector<OpenBabel::OBMol*> linkmol;
+std::string subject_file;
+OpenBabel::OBMol* subject = new OpenBabel::OBMol();
 
 void Cleanup(std::vector<Linker*>& linkers, std::vector<Brick*>& bricks);
 
@@ -237,6 +239,12 @@ void readMoleculeFile(const char* fileName)
         addMolecule(tolower(fileName[0]), local); 
 
         // DEWEY 6/27: dont delete the molecule, instead save it to either the brick or linker list
+		if (Constants::IS_SUBJECT_FILE)
+		{
+			Constants::IS_SUBJECT_FILE = false;
+			subject = mol;
+			
+		}
 		if (fileName[0] == 'l')
 		{
 			linkmol.push_back(mol);
@@ -258,6 +266,12 @@ void readMoleculeFile(const char* fileName)
 //
 bool readInputFiles(const Options& options)
 {
+	if (Options::DISTRIBUTION_ANALYSIS){
+		subject_file = inFiles.front();
+		inFiles.erase(inFiles.begin);
+		
+	}
+	
     for (std::vector<std::string>::const_iterator it = options.inFiles.begin();
          it != options.inFiles.end(); it++)
     {
@@ -325,7 +339,7 @@ int main(int argc, char** argv)
 	}    
 	
 	//Added 6/23 - Dewey
-	FragmentAnalysis analyzer(linkmol, brickmol);
+	FragmentAnalysis analyzer(linkmol, brickmol, subject);
 	analyzer.doAnalysis();
       
 	Cleanup(linkers, bricks);

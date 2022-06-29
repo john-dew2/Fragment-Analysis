@@ -262,7 +262,22 @@ bool Options::handleOption(int& index)
             USE_LIPINSKI = true;
         return true;
     }
-
+	
+	if (strncmp(argv[index], "-freq", 4) == 0)
+	{
+		if (strcmp(argv[index], "-freq") == 0)
+            FREQUENCY_ANALYSIS = true;
+			IS_SUBJECT_FILE = false;
+        return true;
+	}
+		
+	if (strncmp(argv[index], "-dist", 4) == 0)
+	{
+		if (strcmp(argv[index], "-dist") == 0)
+            DISTRIBUTION_ANALYSIS = true;
+			IS_SUBJECT_FILE = true
+        return true;
+	}
 
 /*
 

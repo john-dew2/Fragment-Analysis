@@ -60,7 +60,7 @@
 #include "FragmentAnalysis.h"
 
 
-	FragmentAnalysis::FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks) : _linkers(linkers), _bricks(bricks)
+	FragmentAnalysis::FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks, OpenBabel::OBMol* subject) : _linkers(linkers), _bricks(bricks), _subject(subject)
 	{
 		//FragmentAnalysis::_linkers = linkers;
 		//FragmentAnalysis::_bricks = bricks;
@@ -226,29 +226,32 @@
 	//
 	void FragmentAnalysis::doAnalysis(){
 		
-		//create two maps
-		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
-		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
+		if (Options::FREQUENCY_ANALYSIS){
+			//create two maps
+			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
+			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
 		
-		//run a frequency analysis on the two sets
-		brickMap  = fragmentAnalysis(FragmentAnalysis::_bricks);
-		linkerMap = fragmentAnalysis(FragmentAnalysis::_linkers);
+			//run a frequency analysis on the two sets
+			brickMap  = fragmentAnalysis(FragmentAnalysis::_bricks);
+			linkerMap = fragmentAnalysis(FragmentAnalysis::_linkers);
+			
+			//print the contents
+			std::cout<<"Brick Map contents: ";
+			printMap(brickMap);
+			std::cout << std::endl;
+			
+			std::cout<<"Linker Map contents: ";
+			printMap(linkerMap);
+			std::cout << std::endl;
+		}
 		
-		//print the contents
-		std::cout<<"Brick Map contents: ";
-		printMap(brickMap);
-		std::cout << std::endl;
-		
-		std::cout<<"Linker Map contents: ";
-		printMap(linkerMap);
-		std::cout << std::endl;
-		
-		map<double, int> distributionBrick  = distributionAnalysis(_bricks[0], _bricks);
-		map<double, int> distributionLinker = distributionAnalysis(_linkers[0], _linkers);
-		
-		printDistribution(distributionBrick);
-		printDistribution(distributionLinker);
-		
+		if (Options::DISTRIBUTION_ANALYSIS){
+			map<double, int> distributionBrick  = distributionAnalysis(subject, _bricks);
+			map<double, int> distributionLinker = distributionAnalysis(subject, _linkers);
+			
+			printDistribution(distributionBrick);
+			printDistribution(distributionLinker);
+		}
 		//writeReport("brick-report.txt", brickMap);
 		//writeReport("linker-report.txt", linkerMap);
 		

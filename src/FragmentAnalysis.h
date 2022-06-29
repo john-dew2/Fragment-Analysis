@@ -9,7 +9,7 @@
 
 class FragmentAnalysis{
 	public:
-		FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks);
+		FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks, OpenBabel::OBMol* subject);
 		double tanimotoCalc(OpenBabel::OBMol* mol1, OpenBabel::OBMol* mol2);
 		void writeReport(std::string fileName, map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>);
 		void printMap(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map);
@@ -21,6 +21,7 @@ class FragmentAnalysis{
 	private:
 		std::vector<OpenBabel::OBMol*>& _linkers;
 		std::vector<OpenBabel::OBMol*>& _bricks;
+		OpenBabel::OBMol* _subject
 };
 
 // void Analysis::doFrequencyAnalysis(std::vector<OpenBabel::OBMol*>& linkerList, std::vector<OpenBabel::OBMol*>& brickList){
