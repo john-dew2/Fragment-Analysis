@@ -1,0 +1,23 @@
+Download-Obabel.txt
+Copy and paste into your colab to download
+
+# Add folders to LD_LIBRARY_PATH environmental variable
+# might not need :/usr/include/gsl
+import os
+os.environ['LD_LIBRARY_PATH'] = os.environ['LD_LIBRARY_PATH'] + ':/usr/local/lib:/usr/include/gsl' 
+
+# Install GSL & ZLIB
+!sudo apt-get install libgsl-dev
+
+# Get & Install OpenBabel 2.4.1
+!wget -q https://github.com/openbabel/openbabel/archive/refs/tags/openbabel-2-4-1.tar.gz
+![[ "$(md5sum < openbabel-2-4-1.tar.gz)" = "c0e0aefeef0f9f2bb2c78109d65c30a5  -" ]] && echo MD5 Pass || echo MD5 Fail
+!tar -xzf openbabel-2-4-1.tar.gz
+!mkdir build
+%cd /content/build
+!cmake /content/openbabel-openbabel-2-4-1 -Wno-dev
+!make -j16 && make install
+
+# Clean up files
+%cd /content/
+!rm /content/openbabel-2-4-1.tar.gz
