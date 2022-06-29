@@ -71,7 +71,7 @@ std::vector<Brick*> bricks;
 
 std::vector<OpenBabel::OBMol*> brickmol;
 std::vector<OpenBabel::OBMol*> linkmol;
-const char* subject_file;
+std::string subject_file;
 OpenBabel::OBMol* subject = new OpenBabel::OBMol();
 
 void Cleanup(std::vector<Linker*>& linkers, std::vector<Brick*>& bricks);
