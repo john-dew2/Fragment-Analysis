@@ -246,8 +246,8 @@
 		}
 		
 		if (Options::DISTRIBUTION_ANALYSIS){
-			map<double, int> distributionBrick  = distributionAnalysis(subject, _bricks);
-			map<double, int> distributionLinker = distributionAnalysis(subject, _linkers);
+			map<double, int> distributionBrick  = distributionAnalysis(_subject, _bricks);
+			map<double, int> distributionLinker = distributionAnalysis(_subject, _linkers);
 			
 			printDistribution(distributionBrick);
 			printDistribution(distributionLinker);
