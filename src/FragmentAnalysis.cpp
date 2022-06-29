@@ -14,58 +14,25 @@
 #include <cstdlib>
 #include <cctype>
 #include <cmath>
-//#include <mcheck.h>
-
 
 //
 // Open Babel
 //
-//#include <openbabel/obconversion.h>
 #include <openbabel/mol.h>
-//#include <openbabel/generic.h>
-//#include <openbabel/atom.h>
-//#include <openbabel/bond.h>
-//#include <openbabel/groupcontrib.h>
 #include <openbabel/fingerprint.h>
-
-
-//
-// This project molecular representation
-//
-//#include "Atom.h"
-//#include "Bond.h"
-//#include "Molecule.h"
-//#include "Brick.h"
-
 
 //
 // File processing in / out.
 //
 #include "OBWriter.h"
 #include "Options.h"
-//#include "Validator.h"
 
-
-
-//
-// Synthesis-Based Functionality
-//
-
-//#include "EdgeAnnotation.h"
-//#include "Instantiator.h"
-
-//#include "Utilities.h"
-//#include "IdFactory.h"
 #include "Constants.h"
 #include "FragmentAnalysis.h"
 
 
-	FragmentAnalysis::FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks, OpenBabel::OBMol* subject) : _linkers(linkers), _bricks(bricks), _subject(subject)
-	{
-		//FragmentAnalysis::_linkers = linkers;
-		//FragmentAnalysis::_bricks = bricks;
-	}
-	
+	//Constructor
+	FragmentAnalysis::FragmentAnalysis(std::vector<OpenBabel::OBMol*>& linkers, std::vector<OpenBabel::OBMol*>& bricks, OpenBabel::OBMol* subject) : _linkers(linkers), _bricks(bricks), _subject(subject){}
 	
 	//
 	// calculate the tanimoto coefficient of two moelcules
@@ -91,7 +58,7 @@
 	//
 	// write a report to a file with the name of the molecule and what other molecules are similar to that one
 	//
-	void FragmentAnalysis::writeReport(std::string fileName, map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map)
+	void FragmentAnalysis::writeFreqReport(std::string fileName, map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map)
 	{
 		const char* name;
 		int numSimilar;
@@ -124,9 +91,31 @@
 		reportFile.close();
 	}
 	
+	//
+	// writes the distribution information to a file
+	//
+	void FragmentAnalysis::writeDistReport(std::string fileName, map<double, int> map)
+	{
+		double tanimoto;
+		int occurances;
+		
+		// Create and open a text file
+		ofstream reportFile(fileName);
+		
+		//for each entry in the map
+		for (const auto& pair : map) 
+		{
+			tanimoto = pair.first
+			occurances = pair.second
+			std::cout << "Tanimoto Coefficient: " << category << ", contains " << amount << " fragments." << std::endl;
+		}
+		// Close the file
+		reportFile.close();
+	}
+	
 	
 	//
-	// pritns the ouput of a map in the format of pair<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>
+	// prints the ouput of a map in the format of pair<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>
 	//
 	void FragmentAnalysis::printMap(map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> map)
 	{
@@ -139,6 +128,10 @@
 		}
     }
 	
+	
+	//
+	// prints the distribution information to the console
+	//
 	void FragmentAnalysis::printDistribution(map<double, int> map)
 	{
 		//for every pair in the map, print its name and the nummber of elements similar
@@ -222,18 +215,14 @@
 
 
 	//
-	// Main
+	// Main script for running an analysis on fragment data
 	//
 	void FragmentAnalysis::doAnalysis(){
 		
 		if (Options::FREQUENCY_ANALYSIS){
-			//create two maps
-			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap;
-			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap;
-		
-			//run a frequency analysis on the two sets
-			brickMap  = fragmentAnalysis(FragmentAnalysis::_bricks);
-			linkerMap = fragmentAnalysis(FragmentAnalysis::_linkers);
+			//create two maps and assign the results of a frequency analysis on the two sets
+			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap; = fragmentAnalysis(FragmentAnalysis::_bricks);
+			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap; = fragmentAnalysis(FragmentAnalysis::_linkers);
 			
 			//print the contents
 			std::cout<<"Brick Map contents: ";
@@ -243,16 +232,30 @@
 			std::cout<<"Linker Map contents: ";
 			printMap(linkerMap);
 			std::cout << std::endl;
+			
+			//write a report
+			writeFreqReport("brick-report.txt", brickMap);
+			writeFreqReport("linker-report.txt", linkerMap);
 		}
 		
 		if (Options::DISTRIBUTION_ANALYSIS){
+			//create two maps and assign the results of a distribution analysis on the two sets
 			map<double, int> distributionBrick  = distributionAnalysis(_subject, _bricks);
 			map<double, int> distributionLinker = distributionAnalysis(_subject, _linkers);
 			
+			//print the contents
+			std::cout<<"Brick Distribution contents: ";
 			printDistribution(distributionBrick);
+			std::cout << std::endl;
+			
+			std::cout<<"Linker Distribution contents: ";
 			printDistribution(distributionLinker);
+			std::cout << std::endl;
+			
+			//write a report
+			writeDistReport(distributionBrick);
+			writeDistReport(distributionLinker);
 		}
-		//writeReport("brick-report.txt", brickMap);
-		//writeReport("linker-report.txt", linkerMap);
+		
 		
 	}
