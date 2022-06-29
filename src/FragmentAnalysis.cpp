@@ -1,6 +1,5 @@
-
-
-//Frequency Analysis
+//FrequencyAnalysis.cpp
+//Author: Johnathan Dewey
 
 #include <vector>
 #include<iterator> // for iterators

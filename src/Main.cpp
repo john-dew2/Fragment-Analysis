@@ -126,7 +126,7 @@ bool splitMolecule(std::ifstream& infile, std::string& name,
 // Given a molecule (mol )and its extraneous information (mtype, name, suffix), convert it to a
 // local linker or brick, and feed the information as data for the actual molecular object (mol)
 //
-/*
+
 Molecule* createLocalMolecule(OpenBabel::OBMol* mol, MoleculeT mType,
                               const std::string& name, std::string& suffix)
 {
@@ -152,7 +152,7 @@ Molecule* createLocalMolecule(OpenBabel::OBMol* mol, MoleculeT mType,
     
     return 0;
 }
-*/
+
 
 
 //
@@ -177,6 +177,9 @@ void addOBMolecule(char type, OpenBabel::OBMol* molecule)
 	}
 }
 
+//
+// Reads a molecule to be processed in a list
+//
 void readMoleculeFile(const char* fileName)
 {
 	//
@@ -218,12 +221,10 @@ void readMoleculeFile(const char* fileName)
 		obConversion.ReadString(mol, prefix);
 
         // Assign all needed data to the molecule (comment data)
-        //Molecule* local = createLocalMolecule(mol,
-         //                                     tolower(fileName[0]) == 'l' ? LINKER : BRICK,
-         //                                     name, suffix);
+        Molecule* local = createLocalMolecule(mol, tolower(fileName[0]) == 'l' ? LINKER : BRICK, name, suffix);
 
         // add to logfile
-		/*
+		
         if (Molecule::isOpenBabelLipinskiCompliant(*mol))
         {
             std::ofstream logfile("synth_log_initial_fragments_logfile.txt",
@@ -236,7 +237,7 @@ void readMoleculeFile(const char* fileName)
             logfile.close();
         }
         else std::cerr << "Main: predictLipinski failed somehow!" << endl;
-		*/
+		
     
         // Add to the linker or brick list as needed.
 		addOBMolecule(tolower(fileName[0]), mol); 
@@ -334,6 +335,10 @@ int main(int argc, char** argv)
 	return 0;
 }
 
+
+//
+//removes all linkers and bricks
+//
 void Cleanup(std::vector<Linker*>& linkers, std::vector<Brick*>& bricks)
 {
     for (unsigned ell = 0; ell < linkers.size(); ell++)
