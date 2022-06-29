@@ -28,5 +28,3 @@ double LOGP_UPPERBOUND = 7.2;
 
 
 std::string DEFAULT_OUTPUT_DIR = "synth_output_dir";
-
-bool VALIDATE = false;
