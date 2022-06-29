@@ -181,22 +181,22 @@ void addLocalMolecule(char type, Molecule* molecule)
 //
 // Takes a molecule and its type and appends it to either the linker, bricks, or the catch all category
 //
-void addOBMolecule(char type, Molecule* molecule)
+void addOBMolecule(char type, OpenBabel::OBMol* molecule)
 {
 	//if we are intrested in distribution analysis, then the first file will be our subject
 	if (Options::IS_SUBJECT_FILE)
 	{
 		Options::IS_SUBJECT_FILE = false;
-		subject = mol;			
+		subject = molecule;			
 	}
 	if (type == 'l')
 	{
-		linkmol.push_back(mol);
+		linkmol.push_back(molecule);
 	}
 	// brick or brick
 	else if (type == 'r' || type == 'b')
 	{
-		brickmol.push_back(mol);        
+		brickmol.push_back(molecule);        
 	}
 }
 
