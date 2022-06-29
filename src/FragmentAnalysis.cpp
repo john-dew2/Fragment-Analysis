@@ -221,8 +221,8 @@
 		
 		if (Options::FREQUENCY_ANALYSIS){
 			//create two maps and assign the results of a frequency analysis on the two sets
-			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap; = fragmentAnalysis(FragmentAnalysis::_bricks);
-			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap; = fragmentAnalysis(FragmentAnalysis::_linkers);
+			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap = fragmentAnalysis(FragmentAnalysis::_bricks);
+			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap = fragmentAnalysis(FragmentAnalysis::_linkers);
 			
 			//print the contents
 			std::cout<<"Brick Map contents: ";
@@ -234,8 +234,8 @@
 			std::cout << std::endl;
 			
 			//write a report
-			writeFreqReport("brick-report.txt", brickMap);
-			writeFreqReport("linker-report.txt", linkerMap);
+			writeFreqReport("brick-frequency-report.txt", brickMap);
+			writeFreqReport("linker-frequency-report.txt", linkerMap);
 		}
 		
 		if (Options::DISTRIBUTION_ANALYSIS){
@@ -253,8 +253,8 @@
 			std::cout << std::endl;
 			
 			//write a report
-			writeDistReport(distributionBrick);
-			writeDistReport(distributionLinker);
+			writeDistReport("brick-distribution-report.txt", distributionBrick);
+			writeDistReport("linker-distribution-report.txt", distributionLinker);
 		}
 		
 		
