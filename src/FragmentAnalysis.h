@@ -1,3 +1,14 @@
+/*
+ *  This file is part of FrequencyAnalysis.
+ *
+ *	File takes in a set of bricks and linkers and, if needed, a single molecule
+ *
+ *
+ *
+ *
+ *
+ */
+
 #ifndef _ANALYSIS_GUARD
 #define _ANALYSIS_GUARD 1
 

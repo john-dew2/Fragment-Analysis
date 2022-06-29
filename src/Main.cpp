@@ -254,13 +254,6 @@ void readMoleculeFile(const char* fileName)
 //
 bool readInputFiles(const Options& options)
 {
-	/*
-	if (Options::DISTRIBUTION_ANALYSIS){
-		subject_file = options.inFiles.front();
-		options.inFiles.erase(options.inFiles.begin());
-		
-	}
-	*/
 	
     for (std::vector<std::string>::const_iterator it = options.inFiles.begin();
          it != options.inFiles.end(); it++)
