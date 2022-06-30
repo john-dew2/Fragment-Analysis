@@ -233,6 +233,7 @@ void readMoleculeFile(const char* fileName)
 
         // Create and parse using Open Babel
 		OpenBabel::OBMol* mol;
+		cout << "Attempting to create OBMol from " << fileName << std::endl;
 		try 
 		{         
 			mol = new OpenBabel::OBMol();
@@ -243,6 +244,7 @@ void readMoleculeFile(const char* fileName)
 			cout << fileName << " failed to convert to OBMol Object" << std::endl;
 			skip = true;
 		}
+		cout << "Caught"<<std:endl;
 		if (!skip)
 		{
 			// Assign all needed data to the molecule (comment data)
