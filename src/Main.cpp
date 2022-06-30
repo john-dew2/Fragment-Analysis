@@ -165,7 +165,7 @@ Molecule* createLocalMolecule(OpenBabel::OBMol* mol, MoleculeT mType,
 //
 // Takes a molecule and its type and appends it to either the linker, bricks, or the catch all category
 //
-void addOBMolecule(char type, OpenBabel::OBMol* molecule)
+void addOBMolecule(char type, OpenBabel::OBMol* molecule, const char* fileName)
 {
 	//if we are intrested in distribution analysis, then the first file will be our subject
 	if (Options::IS_SUBJECT_FILE)
@@ -271,7 +271,7 @@ void readMoleculeFile(const char* fileName)
 			*/
 		
 			// Add to the linker or brick list as needed.
-			addOBMolecule(tolower(fileName[0]), mol); 
+			addOBMolecule(tolower(fileName[0]), mol, fileName); 
 		}
 		skip = false;
 			
