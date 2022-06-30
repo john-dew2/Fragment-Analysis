@@ -230,7 +230,7 @@
 			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap = fragmentAnalysis(FragmentAnalysis::_bricks);
 			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap = fragmentAnalysis(FragmentAnalysis::_linkers);
 			
-			if (!BrickMap.empty())
+			if (!brickMap.empty())
 			{
 				//print the contents
 				std::cout<<"Brick Map contents: ";
