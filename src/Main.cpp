@@ -74,8 +74,10 @@
 //
 std::vector<Linker*> linkers;
 std::vector<Brick*> bricks;
+std::vector<const AtomT*> misc;
 std::vector<OpenBabel::OBMol*> brickmol;
 std::vector<OpenBabel::OBMol*> linkmol;
+std::vector<OpenBabel::OBMol*> miscmol;
 std::string subject_file;
 OpenBabel::OBMol* subject = new OpenBabel::OBMol();
 
@@ -180,6 +182,10 @@ void addOBMolecule(char type, OpenBabel::OBMol* molecule)
 	{
 		brickmol.push_back(molecule);        
 	}
+	else
+	{
+		miscmol.push_back(molecule);
+	}
 }
 
 //
@@ -204,6 +210,8 @@ void readMoleculeFile(const char* fileName)
     std::string prefix = "";
     std::string suffix = "";
     
+	bool skip = false
+	
     while(splitMolecule(infile, name, prefix, suffix))
     {
         //
@@ -222,30 +230,40 @@ void readMoleculeFile(const char* fileName)
         if (g_debug_output) std::cerr << "Suffix: " << std::endl << suffix << std::endl;
 
         // Create and parse using Open Babel
-        OpenBabel::OBMol* mol = new OpenBabel::OBMol();
-		obConversion.ReadString(mol, prefix);
+		try 
+		{         
+			OpenBabel::OBMol* mol = new OpenBabel::OBMol();
+			obConversion.ReadString(mol, prefix);
+		} 
+		catch (...) 
+		{ 
+			cout << filename << " failed to convert to OBMol Object" << std::endl;
+			skip = true;
+		}
+		if (!skip)
+		{
+			// Assign all needed data to the molecule (comment data)
+			Molecule* local = createLocalMolecule(mol, tolower(fileName[0]) == 'l' ? LINKER : BRICK, name, suffix);
 
-        // Assign all needed data to the molecule (comment data)
-        Molecule* local = createLocalMolecule(mol, tolower(fileName[0]) == 'l' ? LINKER : BRICK, name, suffix);
-
-        // add to logfile
-        if (Molecule::isOpenBabelLipinskiCompliant(*mol))
-        {
-            std::ofstream logfile("synth_log_initial_fragments_logfile.txt",
-                                  std::ofstream::out | std::ofstream::app); // append
-            logfile << fileName << "\nMolWt = " << local->getMolWt() << "\n";
-            logfile << "HBD = " << local->getHBD() << "\n";
-            logfile << "HBA1 = " << local->getHBA1() << "\n";
-            logfile << "logP = " << local->getlogP() << "\n";
-            logfile << std::endl;
-            logfile.close();
-        }
-        else std::cerr << "Main: predictLipinski failed somehow!" << endl;
+			// add to logfile
+			if (Molecule::isOpenBabelLipinskiCompliant(*mol))
+			{
+				std::ofstream logfile("synth_log_initial_fragments_logfile.txt",
+									  std::ofstream::out | std::ofstream::app); // append
+				logfile << fileName << "\nMolWt = " << local->getMolWt() << "\n";
+				logfile << "HBD = " << local->getHBD() << "\n";
+				logfile << "HBA1 = " << local->getHBA1() << "\n";
+				logfile << "logP = " << local->getlogP() << "\n";
+				logfile << std::endl;
+				logfile.close();
+			}
+			else std::cerr << "Main: predictLipinski failed somehow!" << endl;
+			
 		
-    
-        // Add to the linker or brick list as needed.
-		addOBMolecule(tolower(fileName[0]), mol); 
-
+			// Add to the linker or brick list as needed.
+			addOBMolecule(tolower(fileName[0]), mol, skip); 
+		}
+		skip = false;
 			
 		//COME BACK AND FIX
 		//delete mol;
@@ -264,12 +282,14 @@ bool readInputFiles(const Options& options)
     {
         char charPrefix = tolower((*it)[0]); 
 		//if there exists a file with no l or b or r as a prefix, send an error to the user
+		/*
         if (charPrefix != 'l' && charPrefix != 'r' && charPrefix != 'b')
         {
             cerr << "Unexpected file prefix: \'" << (*it)[0]
                  << "\' with file " << *it << endl;
             return false;
         }
+		*/
 
 		//send each successful file to be read into data
         readMoleculeFile((*it).c_str());
