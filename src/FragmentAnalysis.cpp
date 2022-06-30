@@ -114,7 +114,7 @@
 		{
 			tanimoto = pair.first;
 			occurances = pair.second;
-			std::cout << "Tanimoto Coefficient: " << tanimoto << ", contains " << occurances << " fragments." << std::endl;
+			reportFile << "Tanimoto Coefficient: " << tanimoto << ", contains " << occurances << " fragments." << std::endl;
 		}
 		// Close the file
 		reportFile.close();
