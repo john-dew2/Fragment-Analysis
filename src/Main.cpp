@@ -205,9 +205,7 @@ void readMoleculeFile(const char* fileName)
     // and Our Data (Suffix)
     //
     std::ifstream infile;
-	cout << "Opening " << fileName << "..." << std::endl;
     infile.open(fileName);
-	cout << "Opened " << fileName << std::endl;
 
     std::string name = "UNKNOWN";
     std::string prefix = "";
@@ -234,7 +232,6 @@ void readMoleculeFile(const char* fileName)
 
         // Create and parse using Open Babel
 		OpenBabel::OBMol* mol;
-		cout << "Attempting to create OBMol from " << fileName << std::endl;
 		try 
 		{         
 			mol = new OpenBabel::OBMol();
@@ -242,10 +239,8 @@ void readMoleculeFile(const char* fileName)
 		} 
 		catch (...) 
 		{ 
-			cout << fileName << " failed to convert to OBMol Object" << std::endl;
 			skip = true;
 		}
-		cout << "Caught"<<std::endl;
 		if (!skip)
 		{
 			// Assign all needed data to the molecule (comment data)
@@ -325,18 +320,15 @@ int main(int argc, char** argv)
 	Options options(argc, argv);
 	
 	//parse the command line to determine what it is the user wants to do
-	cout << "Parsing Command Line..." << std::endl;
 	if (!options.parseCommandLine())
 	{
 		std::cerr << "Command-line parsing failed; exiting." << std::endl;
 		return 1;
 	}
-	cout << "Parsed Command Line" << std::endl;
 
     // 
     // Output command-line option information
     //
-	cout << "Outputting Command-Line Option Information..." << std::endl;
 	if (Options::THREADED) std::cout << "Threaded execution :P." << std::endl;
 	else if (Options::SERIAL) std::cout << "Serial execution." << std::endl;
 	else
@@ -355,16 +347,13 @@ int main(int argc, char** argv)
 		std::cerr << "OBGEN output thread pool size: "
 				  << Options::OBGEN_THREAD_POOL_SIZE << std::endl;
 	}
-	cout << "Outputed Command-Line Option Information" << std::endl;
 	
 	//read the files and put them into lists
-	cout << "Reading Input Files..." << std::endl;
 	if (!readInputFiles(options)) 
 	{
 		std::cout << "Did not read input files" <<std:: endl;
 		return 1;
 	}
-	cout << "Read Input Files" << std::endl;
 	
 	//create a new analyzer object and run an analysis on the data
 	FragmentAnalysis analyzer(linkmol, brickmol, subject);
