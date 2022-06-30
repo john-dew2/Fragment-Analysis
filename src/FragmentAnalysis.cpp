@@ -179,7 +179,6 @@
 			frequencyMap.insert(pair<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>(frag1, similarities));
 			similarities.clear();
 		}
-		
 		return frequencyMap;
 	}
 	
@@ -231,18 +230,27 @@
 			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap = fragmentAnalysis(FragmentAnalysis::_bricks);
 			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap = fragmentAnalysis(FragmentAnalysis::_linkers);
 			
-			//print the contents
-			std::cout<<"Brick Map contents: ";
-			printMap(brickMap);
-			std::cout << std::endl;
+			if (BrickMap.size() != 0)
+			{
+				//print the contents
+				std::cout<<"Brick Map contents: ";
+				printMap(brickMap);
+				std::cout << std::endl;
+				
+				//write a report
+				writeFreqReport("brick-frequency-report.txt", brickMap);
+			}
 			
-			std::cout<<"Linker Map contents: ";
-			printMap(linkerMap);
-			std::cout << std::endl;
-			
-			//write a report
-			writeFreqReport("brick-frequency-report.txt", brickMap);
-			writeFreqReport("linker-frequency-report.txt", linkerMap);
+			if (linkerMap.size() != 0)
+			{
+				//print the contents
+				std::cout<<"Linker Map contents: ";
+				printMap(linkerMap);
+				std::cout << std::endl;
+				
+				//write a report
+				writeFreqReport("linker-frequency-report.txt", linkerMap);
+			}
 		}
 		
 		if (Options::DISTRIBUTION_ANALYSIS){
@@ -251,18 +259,20 @@
 			map<double, int> distributionLinker = distributionAnalysis(_subject, _linkers);
 			
 			//print the contents
-			std::cout<<"Brick Distribution contents: " << std::endl;
-			printDistribution(distributionBrick);
-			std::cout << std::endl;
+			if (distributionBrick.size() != 0)
+			{
+				std::cout<<"Brick Distribution contents: " << std::endl;
+				printDistribution(distributionBrick);
+				std::cout << std::endl;
+				writeDistReport("brick-distribution-report.txt", distributionBrick);
+			}
 			
-			std::cout<<"Linker Distribution contents: " << std::endl;
-			printDistribution(distributionLinker);
-			std::cout << std::endl;
-			
-			//write a report
-			writeDistReport("brick-distribution-report.txt", distributionBrick);
-			writeDistReport("linker-distribution-report.txt", distributionLinker);
+			if (distributionLinker.size() != 0)
+			{
+				std::cout<<"Linker Distribution contents: " << std::endl;
+				printDistribution(distributionLinker);
+				std::cout << std::endl;
+				writeDistReport("linker-distribution-report.txt", distributionLinker);
+			}
 		}
-		
-		
 	}
