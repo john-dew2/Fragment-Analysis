@@ -204,7 +204,9 @@ void readMoleculeFile(const char* fileName)
     // and Our Data (Suffix)
     //
     std::ifstream infile;
+	cout << "Opening " << fileName << "..." << std::endl;
     infile.open(fileName);
+	cout << "Opened " << fileName << std::endl;
 
     std::string name = "UNKNOWN";
     std::string prefix = "";
@@ -281,7 +283,7 @@ bool readInputFiles(const Options& options)
     for (std::vector<std::string>::const_iterator it = options.inFiles.begin();
          it != options.inFiles.end(); it++)
     {
-        char charPrefix = tolower((*it)[0]); 
+        //char charPrefix = tolower((*it)[0]); 
 		//if there exists a file with no l or b or r as a prefix, send an error to the user
 		/*
         if (charPrefix != 'l' && charPrefix != 'r' && charPrefix != 'b')
