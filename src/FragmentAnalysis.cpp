@@ -251,11 +251,11 @@
 			map<double, int> distributionLinker = distributionAnalysis(_subject, _linkers);
 			
 			//print the contents
-			std::cout<<"Brick Distribution contents: ";
+			std::cout<<"Brick Distribution contents: " << std::endl;
 			printDistribution(distributionBrick);
 			std::cout << std::endl;
 			
-			std::cout<<"Linker Distribution contents: ";
+			std::cout<<"Linker Distribution contents: " << std::endl;
 			printDistribution(distributionLinker);
 			std::cout << std::endl;
 			

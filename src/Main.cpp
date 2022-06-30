@@ -243,35 +243,12 @@ void readMoleculeFile(const char* fileName)
 		}
 		if (!skip)
 		{
-			// Assign all needed data to the molecule (comment data)
-			
-			
-			//An error lies in here, most likely createLocalMolecule()
-			/*
-			Molecule* local = createLocalMolecule(mol, tolower(fileName[0]) == 'l' ? LINKER : BRICK, name, suffix);
-
-			// add to logfile
-			if (Molecule::isOpenBabelLipinskiCompliant(*mol))
-			{
-				std::ofstream logfile("synth_log_initial_fragments_logfile.txt",
-									  std::ofstream::out | std::ofstream::app); // append
-				logfile << fileName << "\nMolWt = " << local->getMolWt() << "\n";
-				logfile << "HBD = " << local->getHBD() << "\n";
-				logfile << "HBA1 = " << local->getHBA1() << "\n";
-				logfile << "logP = " << local->getlogP() << "\n";
-				logfile << std::endl;
-				logfile.close();
-			}
-			else std::cerr << "Main: predictLipinski failed somehow!" << endl;
-			*/
-		
 			// Add to the linker or brick list as needed.
 			addOBMolecule(tolower(fileName[0]), mol, fileName); 
 		}
 		skip = false;
 			
-		//COME BACK AND FIX
-		//delete mol;
+		delete mol;
 	}
 }
 
