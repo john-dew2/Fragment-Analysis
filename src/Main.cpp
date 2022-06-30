@@ -248,6 +248,10 @@ void readMoleculeFile(const char* fileName)
 		if (!skip)
 		{
 			// Assign all needed data to the molecule (comment data)
+			
+			
+			//An error lies in here, most likely createLocalMolecule()
+			/*
 			Molecule* local = createLocalMolecule(mol, tolower(fileName[0]) == 'l' ? LINKER : BRICK, name, suffix);
 
 			// add to logfile
@@ -263,7 +267,7 @@ void readMoleculeFile(const char* fileName)
 				logfile.close();
 			}
 			else std::cerr << "Main: predictLipinski failed somehow!" << endl;
-			
+			*/
 		
 			// Add to the linker or brick list as needed.
 			addOBMolecule(tolower(fileName[0]), mol); 
