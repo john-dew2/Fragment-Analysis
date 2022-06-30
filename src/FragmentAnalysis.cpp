@@ -230,7 +230,7 @@
 			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> brickMap = fragmentAnalysis(FragmentAnalysis::_bricks);
 			map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>linkerMap = fragmentAnalysis(FragmentAnalysis::_linkers);
 			
-			if (BrickMap.size() != 0)
+			if (!BrickMap.empty())
 			{
 				//print the contents
 				std::cout<<"Brick Map contents: ";
@@ -241,7 +241,7 @@
 				writeFreqReport("brick-frequency-report.txt", brickMap);
 			}
 			
-			if (linkerMap.size() != 0)
+			if (!linkerMap.empty())
 			{
 				//print the contents
 				std::cout<<"Linker Map contents: ";
@@ -259,7 +259,7 @@
 			map<double, int> distributionLinker = distributionAnalysis(_subject, _linkers);
 			
 			//print the contents
-			if (distributionBrick.size() != 0)
+			if (!distributionBrick.empty())
 			{
 				std::cout<<"Brick Distribution contents: " << std::endl;
 				printDistribution(distributionBrick);
@@ -267,7 +267,7 @@
 				writeDistReport("brick-distribution-report.txt", distributionBrick);
 			}
 			
-			if (distributionLinker.size() != 0)
+			if (!distributionLinker.empty())
 			{
 				std::cout<<"Linker Distribution contents: " << std::endl;
 				printDistribution(distributionLinker);
