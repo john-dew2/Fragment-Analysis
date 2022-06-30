@@ -116,9 +116,6 @@ bool splitMolecule(std::ifstream& infile, std::string& name,
         prefix += line + '\n';
     }
 
-    // Add '$$$$' to the prefix.
-    // prefix += "\n$$$$";
-
     // Set suffix equal to remainder of the file
     while (line.find("$$$$") == std::string::npos)
     {
@@ -243,28 +240,6 @@ void readMoleculeFile(const char* fileName)
 		}
 		if (!skip)
 		{
-			// Assign all needed data to the molecule (comment data)
-			
-			
-			//An error lies in here, most likely createLocalMolecule()
-			/*
-			Molecule* local = createLocalMolecule(mol, tolower(fileName[0]) == 'l' ? LINKER : BRICK, name, suffix);
-
-			// add to logfile
-			if (Molecule::isOpenBabelLipinskiCompliant(*mol))
-			{
-				std::ofstream logfile("synth_log_initial_fragments_logfile.txt",
-									  std::ofstream::out | std::ofstream::app); // append
-				logfile << fileName << "\nMolWt = " << local->getMolWt() << "\n";
-				logfile << "HBD = " << local->getHBD() << "\n";
-				logfile << "HBA1 = " << local->getHBA1() << "\n";
-				logfile << "logP = " << local->getlogP() << "\n";
-				logfile << std::endl;
-				logfile.close();
-			}
-			else std::cerr << "Main: predictLipinski failed somehow!" << endl;
-			*/
-		
 			// Add to the linker or brick list as needed.
 			addOBMolecule(tolower(fileName[0]), mol, fileName); 
 		}
@@ -285,17 +260,6 @@ bool readInputFiles(const Options& options)
     for (std::vector<std::string>::const_iterator it = options.inFiles.begin();
          it != options.inFiles.end(); it++)
     {
-        //char charPrefix = tolower((*it)[0]); 
-		//if there exists a file with no l or b or r as a prefix, send an error to the user
-		/*
-        if (charPrefix != 'l' && charPrefix != 'r' && charPrefix != 'b')
-        {
-            cerr << "Unexpected file prefix: \'" << (*it)[0]
-                 << "\' with file " << *it << endl;
-            return false;
-        }
-		*/
-
 		//send each successful file to be read into data
         readMoleculeFile((*it).c_str());
     }
