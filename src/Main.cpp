@@ -171,7 +171,8 @@ void addOBMolecule(char type, OpenBabel::OBMol* molecule)
 	if (Options::IS_SUBJECT_FILE)
 	{
 		Options::IS_SUBJECT_FILE = false;
-		subject = molecule;			
+		subject = molecule;	
+		cout << fileName << " is the subject" << std::endl;
 	}
 	if (type == 'l')
 	{
