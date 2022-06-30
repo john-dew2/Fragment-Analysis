@@ -244,7 +244,7 @@ void readMoleculeFile(const char* fileName)
 			cout << fileName << " failed to convert to OBMol Object" << std::endl;
 			skip = true;
 		}
-		cout << "Caught"<<std:endl;
+		cout << "Caught"<<std::endl;
 		if (!skip)
 		{
 			// Assign all needed data to the molecule (comment data)
