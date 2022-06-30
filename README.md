@@ -24,6 +24,14 @@ This README file is written by Johnathan Dewey. Last Update: 06/29/2022
       - ! ./efreq -nopen -serial -smi-only [types of analysis] -prob-level 2 [input file names]
       -   use tag "-freq" to use frequency analysis (frequency analysis takes sets of fragments)
       -   use tag "-dist" to use distribution analysis (note that distribution analysis takes an input file of one molecule first, and sets of fragments)
+
+# Analysis
+  1. Frequency Analysis: Given brick and linker fragments, this analysis takes every fragment and runs a Tanimoto Coefficient (TC) comparison on every fragment in the input. If the TC value reveals a similarity between the two fragments, then the relationship is recorded
+      - Format:  [File Name].sdf: [Number of Fragments Similar],...
+      - Example: b-CHEMBL175476.mol2-001.sdf: 1 fragments similar,...
+  2. Distribution Analysis: Given a fragment, named the subject, and a set of brick or linker fragments, this analysis will run TC comparisons on the given set by comparing each fragment to the subject. This analysis will tell you how similar a specific fragment is to a set of fragments.
+      - Format: Tanimoto Coefficient: [TC Group Value (0.0-1.0)], contains [Number of Fragments with TC Group Value]...
+      - Example: Tanimoto Coefficient: 0.1, contains 4 fragments...
 # Output
   All output is done to the directory /Fragment-Analysis/src/
   The types of files:
