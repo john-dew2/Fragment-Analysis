@@ -230,14 +230,15 @@ void readMoleculeFile(const char* fileName)
         if (g_debug_output) std::cerr << "Suffix: " << std::endl << suffix << std::endl;
 
         // Create and parse using Open Babel
+		OpenBabel::OBMol* mol;
 		try 
 		{         
-			OpenBabel::OBMol* mol = new OpenBabel::OBMol();
+			mol = new OpenBabel::OBMol();
 			obConversion.ReadString(mol, prefix);
 		} 
 		catch (...) 
 		{ 
-			cout << filename << " failed to convert to OBMol Object" << std::endl;
+			cout << fileName << " failed to convert to OBMol Object" << std::endl;
 			skip = true;
 		}
 		if (!skip)
