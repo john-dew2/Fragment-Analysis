@@ -262,7 +262,7 @@ void readMoleculeFile(const char* fileName)
 			
 		
 			// Add to the linker or brick list as needed.
-			addOBMolecule(tolower(fileName[0]), mol, skip); 
+			addOBMolecule(tolower(fileName[0]), mol); 
 		}
 		skip = false;
 			
