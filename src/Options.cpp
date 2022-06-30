@@ -276,6 +276,7 @@ bool Options::handleOption(int& index)
 	{
 		if (strcmp(argv[index], "-freq") == 0)
             Options::FREQUENCY_ANALYSIS = true;
+			Options::DISTRIBUTION_ANALYSIS = false;
 			Options::IS_SUBJECT_FILE = false;
         return true;
 	}
@@ -284,6 +285,7 @@ bool Options::handleOption(int& index)
 	{
 		if (strcmp(argv[index], "-dist") == 0)
             Options::DISTRIBUTION_ANALYSIS = true;
+			Options::FREQUENCY_ANALYSIS = false;
 			Options::IS_SUBJECT_FILE = true;
         return true;
 	}
