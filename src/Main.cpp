@@ -210,7 +210,7 @@ void readMoleculeFile(const char* fileName)
     std::string prefix = "";
     std::string suffix = "";
     
-	bool skip = false
+	bool skip = false;
 	
     while(splitMolecule(infile, name, prefix, suffix))
     {
