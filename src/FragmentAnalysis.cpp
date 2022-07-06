@@ -158,7 +158,7 @@
 	{
 		std::vector<OpenBabel::OBMol*> similarities;
 		double tanimoto;
-		double TC_THRESHOLD = 0.8;
+		double TC_THRESHOLD = 1.0;
 		map<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>> frequencyMap;
 		
 		//for each brick, compare it to every brick
