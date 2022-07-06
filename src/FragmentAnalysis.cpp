@@ -173,7 +173,7 @@
 				
 				//find the tc and add the brick to the list if the tc value is > the threshold
 				tanimoto = tanimotoCalc(frag1, frag2);
-				if (tanimoto > TC_THRESHOLD) similarities.push_back(frag2);
+				if (tanimoto >= TC_THRESHOLD) similarities.push_back(frag2);
 			}
 			//add a new map entry before the next iteration, and clear the similarity list after each iteration
 			frequencyMap.insert(pair<OpenBabel::OBMol*, std::vector<OpenBabel::OBMol*>>(frag1, similarities));
